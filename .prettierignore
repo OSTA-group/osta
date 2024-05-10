@@ -1,0 +1,6 @@
+# Ignore artifacts
+android
+build
+coverage
+node_modules
+public

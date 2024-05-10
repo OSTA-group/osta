@@ -1,0 +1,41 @@
+.compassCard {
+    max-height: 10em;
+    display: flex;
+    position: absolute;
+    bottom: 14px;
+    left: 55%;
+    z-index: 1;
+    transform: translateX(-50%);
+    width: 75%;
+}
+
+.compassCard__text {
+    width: auto;
+    height: auto;
+    flex-grow: 1;
+    align-content: center;
+    align-items: center;
+}
+
+.compassCard__image ion-img{
+    height: 100px;
+    width: 90%;
+}
+
+.image__dark {
+    display: none;
+}
+
+.image__light {
+    display: block;
+}
+
+@media(prefers-color-scheme: dark) {
+    .image__dark {
+        display: block;
+    }
+
+    .image__light {
+        display: none;
+    }
+}

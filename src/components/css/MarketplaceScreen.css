@@ -1,0 +1,25 @@
+.ion-item__flex {
+    display: flex;
+    padding: 10px;
+}
+
+.ion-text__h3 {
+    margin-top: 0;
+}
+
+.flex__left {
+    flex-grow: 1;
+}
+
+.flex__right {
+    flex-grow: 0;
+}
+
+.ion-button__download {
+    width: 5em;
+    height: 1em;
+}
+
+.ion-spinner__download {
+    height: 1.5em;
+}

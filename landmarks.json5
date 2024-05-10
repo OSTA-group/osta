@@ -1,0 +1,74 @@
+{
+  landmarks: [
+    {
+      lat: 50.5574,
+      lng: 4.1278,
+      types: ['Historical', 'Cultural'],
+      name: 'Manneken Pis Brussel',
+      description: 'Manneken Pis is een standbeeldje van een plassend jongetje in het centrum van Brussel. Het 55,5 cm grote ventje[1] op een sokkel is geplaatst aan de hoek van de Stoofstraat en de Eikstraat, niet ver van de Grote Markt. Het is uitgegroeid tot een van de beroemdste Belgische en Brusselse monumenten en een symbool/mascotte van de stad Brussel. Behalve het Manneken Pis van Brussel zijn er vergelijkbare standbeelden in Geraardsbergen, Westmeerbeek, Broksele en Koksijde, maar is dat van Brussel wereldwijd wel het bekendste.[2] Het is een bronzen creatie van Hiëronymus Duquesnoy uit 1619.'
+    },
+    {
+      lat: 50.5074,
+      lng: 4.1278,
+      types: ['Cultural'],
+      name: 'Boerentoren',
+      description: 'De Boerentoren (recenter ook: KBC-toren) is een in 1931 voltooid monumentaal bouwwerk in art-deco-stijl in het centrum van Antwerpen. Het was de eerste wolkenkrabber in België, en destijds het hoogste torengebouw van Europa.',
+    },
+    {
+      lat: 50.6074,
+      lng: 4.1378,
+      types: ['Historical'],
+      name: 'Info Support Building',
+      description: 'Van architectuur, ontwikkeling tot beheer en training. Met een resultaatgedreven focus ontwikkelen en beheren we uw bedrijfskritische IT-systemen. Met een bewezen aanpak zorgen onze experts ervoor dat het volledige potentieel van uw IT-landschap benut wordt. Zo bent u klaar voor de toekomst.',
+    },
+    {
+      lat: 50.5723,
+      lng: 4.3879,
+      types: ['Natural', 'Cultural'],
+      name: 'Royal Botanical Gardens',
+      description: 'Nestled in the heart of Brussels, the Royal Botanical Gardens is a lush oasis spanning over 30 hectares. Established in the 19th century, it showcases a diverse collection of flora from around the world, including rare and endangered species. Visitors can stroll through themed gardens, explore greenhouses filled with exotic plants, and unwind in serene surroundings.'
+    },
+    {
+      lat: 50.4641,
+      lng: 4.8639,
+      types: ['Historical', 'Architectural'],
+      name: 'Citadel of Namur',
+      description: 'Perched atop a rocky outcrop overlooking the Meuse River, the Citadel of Namur is a centuries-old fortress steeped in history. Originally built in the Roman era, it has been expanded and fortified over the centuries, serving as a strategic stronghold during various conflicts. Today, visitors can tour its ramparts, explore underground tunnels, and enjoy panoramic views of the surrounding countryside.'
+    },
+    {
+      lat: 50.7102,
+      lng: 4.3816,
+      types: ['Cultural', 'Artistic'],
+      name: 'Hergé Museum',
+      description: 'Dedicated to the life and work of Belgian cartoonist Hergé, the Hergé Museum celebrates the iconic creator of Tintin and other beloved comic book characters. Located in Louvain-la-Neuve, the museum showcases original artwork, manuscripts, and memorabilia spanning Hergé\'s prolific career. Visitors can immerse themselves in the colorful world of Tintin, Snowy, and their adventures across the globe.'
+    },
+    {
+      lat: 51.0575,
+      lng: 3.7209,
+      types: ['Historical', 'Architectural'],
+      name: 'Gravensteen Castle',
+      description: 'Situated in the heart of Ghent, Gravensteen Castle, also known as the Castle of the Counts, is a medieval fortress dating back to the 12th century. With its imposing walls, turrets, and moat, the castle offers a glimpse into Belgium\'s feudal past. Visitors can explore its battlements, dungeons, and medieval weaponry, while enjoying panoramic views of the cityscape.'
+    },
+    {
+      lat: 50.8947,
+      lng: 4.3416,
+      types: ['Architectural', 'Cultural'],
+      name: 'Atomium',
+      description: 'A symbol of modernity and innovation, the Atomium is an iconic structure in Brussels, originally built for the 1958 World Expo. Resembling a giant atom, it consists of interconnected spheres housing exhibitions, panoramic views, and a restaurant. Visitors can marvel at its futuristic design, learn about scientific advancements, and enjoy breathtaking vistas from its observation decks.'
+    },
+    {
+      lat: 51.2089,
+      lng: 3.2247,
+      types: ['Historical', 'Architectural'],
+      name: 'Belfry of Bruges',
+      description: 'Rising majestically above the medieval skyline of Bruges, the Belfry is a UNESCO World Heritage Site and one of the city\'s most recognizable landmarks. Dating back to the 13th century, this towering bell tower offers commanding views of Bruges\' cobblestone streets, historic buildings, and picturesque canals. Visitors can climb its 366 steps to reach the top and witness the enchanting beauty of Bruges from above.'
+    },
+    {
+      lat: 50.8427,
+      lng: 4.3585,
+      types: ['Cultural', 'Artistic'],
+      name: 'Musical Instruments Museum (MIM)',
+      description: 'Located in the heart of Brussels, the Musical Instruments Museum (MIM) is a treasure trove for music enthusiasts and history buffs alike. Housed in a stunning Art Nouveau building, the museum boasts a vast collection of over 8,000 musical instruments from around the world. Visitors can admire rare specimens, learn about their cultural significance, and even enjoy live performances showcasing these instruments\' melodic potential.'
+    }
+  ]
+}

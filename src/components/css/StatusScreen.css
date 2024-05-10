@@ -1,0 +1,24 @@
+.statusContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.statusContainer__text {
+    padding-top: 10px;
+}
+
+.statusContainer__image {
+    height: 450px;
+    width: 450px;
+}
+
+.statusContainer__credentials {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 10px;
+    font-style: italic
+}
