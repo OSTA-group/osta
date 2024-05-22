@@ -29,6 +29,15 @@ async function downloadNewExtension(extension: MarketplaceExtension): Promise<vo
 async function deleteExtension(extensionName: string): Promise<void> {
   const installedExtension = await ExtensionRepository.getExtensionByName(extensionName)
 
+  if(!installedExtension) {
+    throw new Error(`Extension ${extensionName} not found, aborting deletion`)
+  }
+
+  // Remove variables
+  for(const variable in installedExtension.variables) {
+    await AdapterHelper.removeValueForVariable(installedExtension, variable)
+  }
+
   if (installedExtension) {
     await TypeAdapter.uninstallExtension(installedExtension.type, installedExtension)
     await ExtensionRepository.removeExtensionById(installedExtension.id)
@@ -40,13 +49,23 @@ async function getExtensionConfiguration(extension: MarketplaceExtension): Promi
   return result.data
 }
 
+async function getExtensionConfigurationVariables(extension: Extension): Promise<Record<string, unknown>> {
+  const variables: Record<string, unknown> = {}
+
+  for (const variableName of extension.variables) {
+    variables[variableName] = await AdapterHelper.getValueForVariable(extension, variableName);
+  }
+  
+  return variables
+}
+
 async function changeConfigurationForExtension(extension: Extension, configuration: { [key: string]: unknown }): Promise<void> {
   for (const key of Object.keys(configuration)) {
-    await AdapterHelper.setValueForHelper(extension, key, configuration[key])
+    await AdapterHelper.setValueForVariable(extension, key, configuration[key])
   }
 
   extension.configured = true
   await ExtensionRepository.addExtension(extension)
 }
 
-export default { downloadNewExtension, deleteExtension, changeConfigurationForExtension }
+export default { downloadNewExtension, deleteExtension, getExtensionConfigurationVariables, changeConfigurationForExtension }

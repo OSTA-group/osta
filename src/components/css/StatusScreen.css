@@ -1,4 +1,4 @@
-.statusContainer {
+.status-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,16 +6,16 @@
     height: 100vh;
 }
 
-.statusContainer__text {
+.status-container__text {
     padding-top: 10px;
 }
 
-.statusContainer__image {
+.status-container__image {
     height: 450px;
     width: 450px;
 }
 
-.statusContainer__credentials {
+.status-container__credentials {
     position: absolute;
     bottom: 10px;
     left: 10px;

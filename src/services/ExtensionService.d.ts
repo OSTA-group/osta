@@ -4,6 +4,7 @@
  */
 
 import { Extension, MarketplaceExtension } from '../types'
+import AdapterHelper from '../helpers/AdapterHelper'
 
 /**
  * Downloads a new extension from the marketplace.
@@ -20,6 +21,13 @@ declare async function downloadNewExtension(extension: MarketplaceExtension): Pr
  * @throws Error Will throw an error if the extension cannot be found or there is an issue with the uninstallation or removal process.
  */
 declare async function deleteExtension(extensionName: string): Promise<void>
+
+/**
+ * Asynchronously retrieves configuration variables for a given extension.
+ * @param {Extension} extension The extension object containing variables to be fetched.
+ * @returns {Promise<Record<string, unknown>>} A promise that resolves to a record containing the configuration variables.
+ */
+declare async function getExtensionConfigurationVariables(extension: Extension): Promise<Record<string, unknown>>
 
 /**
  * Changes the configuration for a given extension.

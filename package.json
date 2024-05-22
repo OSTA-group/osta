@@ -13,8 +13,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "lint": "eslint",
-    "documentation": "npx typedoc src/**/*.d.ts --entryPointStrategy expand --tsconfig tsconfig.docs.json",
-    "json-server": "npx json-server --watch landmarks.json5"
+    "documentation": "npx typedoc src/**/*.d.ts --entryPointStrategy expand --tsconfig tsconfig.docs.json"
   },
   "dependencies": {
     "@bopen/leaflet-area-selection": "^0.7.0",
@@ -45,6 +44,7 @@
     "leaflet.offline": "^3.0.0-rc.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.5",
     "react-leaflet": "^4.2.1",
     "react-leaflet-cluster": "^2.1.0",
     "react-leaflet-draw": "^0.20.4",
@@ -76,7 +76,6 @@
     "eslint-plugin-react-refresh": "^0.4.6",
     "globals": "^15.0.0",
     "jsdom": "^24.0.0",
-    "json-server": "^1.0.0-alpha.23",
     "prettier": "^3.2.5",
     "terser": "^5.4.0",
     "typedoc": "^0.25.13",

@@ -100,7 +100,7 @@ async function addNewLandmark(extension: Extension, areaName: string, sourceLand
   }
 
   // Remove the old data from this extension
-  landmark.sources = landmark.sources.filter((sourceInformation: SourceInformation) => sourceInformation.source !== extension.name)
+  landmark.sources = landmark.sources.filter((existingInformation: SourceInformation) => sourceInformation.source !== existingInformation.source || sourceInformation.name !== existingInformation.name)
 
   // Add new data to landmark
   landmark.sources.push(sourceInformation)

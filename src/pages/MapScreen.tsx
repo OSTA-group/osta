@@ -114,9 +114,25 @@ export function MapScreen() {
 
         {/* TRIP NOT STARTED */}
         {!trip.started && (
-          <IonFabButton className="btn__home btn__planTrip btn__color" routerLink={'/trip/create'}>
-            <IonIcon icon={mapOutline}></IonIcon>
-          </IonFabButton>
+          <>
+            <IonFabButton className="btn__home btn__planTrip btn__color" routerLink={'/trip/create'}>
+              <IonIcon icon={mapOutline}></IonIcon>
+            </IonFabButton>
+
+            <IonFab slot="fixed" color="" vertical="top" horizontal="end">
+              <IonFabButton color="light">
+                <IonIcon icon={settingsOutline}></IonIcon>
+              </IonFabButton>
+              <IonFabList side="bottom">
+                <IonFabButton routerLink="/settings/extensions">
+                  <IonIcon icon={folderOpenOutline}></IonIcon>
+                </IonFabButton>
+                <IonFabButton routerLink="/settings/areas">
+                  <IonIcon icon={businessOutline}></IonIcon>
+                </IonFabButton>
+              </IonFabList>
+            </IonFab>
+          </>
         )}
 
         {/* TRIP STARTED AND NOT THE LAST LANDMARK */}
@@ -155,20 +171,6 @@ export function MapScreen() {
             ]}
           ></IonAlert>
         )}
-
-        <IonFab slot="fixed" color="" vertical="top" horizontal="end">
-          <IonFabButton color="light">
-            <IonIcon icon={settingsOutline}></IonIcon>
-          </IonFabButton>
-          <IonFabList side="bottom">
-            <IonFabButton routerLink="/settings/extensions">
-              <IonIcon icon={folderOpenOutline}></IonIcon>
-            </IonFabButton>
-            <IonFabButton routerLink="/settings/areas">
-              <IonIcon icon={businessOutline}></IonIcon>
-            </IonFabButton>
-          </IonFabList>
-        </IonFab>
       </IonContent>
     </IonPage>
   )

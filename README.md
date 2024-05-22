@@ -1,10 +1,13 @@
-# Open Source Tourism App (OSTA)
+# Open Source Tourism App (OSTA) - BETA
 OSTA is an initiative from Belgium Karel De Grote Students in collaboration with Info Support. Our goal is to make travel information accessible for everyone, even without an internet connection.
 
 ## Installation
 
 ### Play store
-The OSTA app will be available on the Play Store soon.
+The OSTA app is available in the play store:
+```
+play store embed
+```
 
 ### Manual installation
 For manual installation see 'How to build' steps from [contributing](https://github.com/BauwenDR/osta/blob/main/.github/CONTRIBUTING.md).
@@ -29,15 +32,10 @@ Imagine that you are going to London for a week, exciting! You want to explore t
 ## Documentation
 You can find the technical documentation [here](https://github.com/BauwenDR/osta/blob/main/.github/OSTA-Technical-Documentation.pdf).
 
-## OSTA Projects
-- [OSTA Extensions](https://github.com/BauwenDR/osta-extensions)
-- [OSTA Marketplace](https://github.com/BauwenDR/osta-marketplace)
-- [OSTA Wikipedia Extension](https://github.com/BauwenDR/osta-wikipedia-extension)
-
 ## Contributing
 See [contributing](https://github.com/BauwenDR/osta/blob/main/.github/CONTRIBUTING.md).
 
 ## Acknowledgements
-- [Toon Vermeulen](https://github.com/insuT0ver) did a great job coaching us
+- Toon Vermeulen did a great job coaching us
 - Tom Cools and [Maarten Mulders](https://github.com/mthmulders) had a great input towards licensing and open-source
 - [Info Support](https://github.com/infosupport) to provide us with this internship

@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ExtensionConfigurationVariable } from '../../types'
-import { IonButton, IonItem, IonList, IonText } from '@ionic/react'
-import { RouteComponentProps } from 'react-router'
+import { IonButton, IonText } from '@ionic/react'
+import { RouteComponentProps, useHistory } from 'react-router'
 import { useExtension } from '../../hooks/useExtension'
 import { AppScreen } from '../../components/AppScreen'
 import { WarningPopup } from '../../components/WarningPopup'
 import { ExtensionConfigurationVariableInput } from '../../components/ExtensionConfigurationVariableInput'
+import ExtensionService from '../../services/ExtensionService'
+import { FormProvider, useForm } from 'react-hook-form'
 
 const pageName = 'Extension properties'
 
@@ -22,7 +24,16 @@ export function ExtensionPropertiesScreen({ match }: ExtensionPropertiesScreenPr
     isErrorGettingExtension,
     putConfiguration,
   } = useExtension(match.params.extensionName)
-  const [inputValues, setInputValues] = useState<{ [key: string]: string }>({})
+  const [inputValues, setInputValues] = useState<Record<string, unknown>>({})
+  const methods = useForm()
+  const history = useHistory()
+
+  useEffect(() => {
+    // Load values of extension variables if they are already present in local storage
+    if (extension) {
+      ExtensionService.getExtensionConfigurationVariables(extension).then(variables => setInputValues(variables))
+    }
+  }, [extension])
 
   const handleInputChange = (name: string, value: string) => {
     setInputValues((prevState) => ({
@@ -34,6 +45,7 @@ export function ExtensionPropertiesScreen({ match }: ExtensionPropertiesScreenPr
   const saveChanges = () => {
     if (extension) {
       putConfiguration({ extension: extension, configuration: inputValues })
+      history.push('/map')
     }
   }
 
@@ -44,30 +56,30 @@ export function ExtensionPropertiesScreen({ match }: ExtensionPropertiesScreenPr
 
       {extension && !extension.configurationVariables && <IonText>Nothing to see here! You are all set.</IonText>}
 
-      <IonList>
-        {extension &&
-          extension.configurationVariables &&
-          extension.configurationVariables.map((configurationVariable: ExtensionConfigurationVariable) => (
-            <IonItem key={configurationVariable.name}>
-              <ExtensionConfigurationVariableInput
-                key={configurationVariable.name}
-                configurationVariable={configurationVariable}
-                value={inputValues[configurationVariable.name]}
-                onInputChange={(value: string) => handleInputChange(configurationVariable.name, value)}
-              />
-            </IonItem>
-          ))}
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(saveChanges)}>
+          {extension &&
+            extension.configurationVariables &&
+            extension.configurationVariables.map((configurationVariable: ExtensionConfigurationVariable) => (
+                <ExtensionConfigurationVariableInput
+                  key={configurationVariable.name}
+                  configurationVariable={configurationVariable}
+                  value={inputValues[configurationVariable.name] as string}
+                  onInputChange={(value: string) => handleInputChange(configurationVariable.name, value)}
+                />
+            ))}
 
-        {extension && extension.configurationVariables && (
-          <IonButton onClick={saveChanges} routerLink={'/map'}>
-            Save properties
-          </IonButton>
-        )}
+          {extension && extension.configurationVariables && (
+            <IonButton className={"ion-margin-top"} type={'submit'}>
+              Save properties
+            </IonButton>
+          )}
 
-        {isErrorGettingExtension && (
-          <WarningPopup title="Warning" message="Something went wrong while getting the properties." isOpen={true} />
-        )}
-      </IonList>
+          {isErrorGettingExtension && (
+            <WarningPopup title="Warning" message="Something went wrong while getting the properties." isOpen={true} />
+          )}
+        </form>
+      </FormProvider>
     </AppScreen>
   )
 }

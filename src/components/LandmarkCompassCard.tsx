@@ -1,6 +1,6 @@
 import React from 'react'
 import { Landmark } from '../types'
-import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg } from '@ionic/react'
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonImg } from '@ionic/react'
 import LocationHelper from '../helpers/LocationHelper'
 import { useCompassDirection } from '../hooks/useCompassDirection'
 import { useLocation } from '../hooks/useLocation'
@@ -23,24 +23,24 @@ export function LandmarkCompassCard({ landmark, currentLandmarkNumber, totalLand
   const title = landmark.sources[0].name
 
   return (
-    <IonCard className="compassCard">
-      <div className="compassCard__text">
+    <IonCard className="compass-card">
+      <div className="compass-card__text">
         <IonCardHeader>
-          <IonCardTitle>
-            {title.length > 20 ? (
+          <IonCardSubtitle>
+            {title.length > 50 ? (
               <>
-                Next stop: {title.substring(0, 20)}... ({currentLandmarkNumber}/{totalLandmarks})
+                Next stop: {title.substring(0, 50)}... ({currentLandmarkNumber}/{totalLandmarks})
               </>
             ) : (
               <>
-                Next stop: {title}... ({currentLandmarkNumber}/{totalLandmarks})
+                Next stop: {title} ({currentLandmarkNumber}/{totalLandmarks})
               </>
             )}
-          </IonCardTitle>
+          </IonCardSubtitle>
         </IonCardHeader>
-        <IonCardContent>Remaining distance: {distanceToNextPoint}</IonCardContent>
+        <IonCardContent>{distanceToNextPoint}</IonCardContent>
       </div>
-      <div className="compassCard__image image__light">
+      <div className="compass-card__image image__light">
         <IonImg
           style={{
             transformOrigin: '50% 50%',
@@ -49,7 +49,7 @@ export function LandmarkCompassCard({ landmark, currentLandmarkNumber, totalLand
           src="/images/compass/compass.svg"
         />
       </div>
-      <div className="compassCard__image ion-palette-dark image__dark">
+      <div className="compass-card__image ion-palette-dark image__dark">
         <IonImg
           style={{
             transformOrigin: '50% 50%',

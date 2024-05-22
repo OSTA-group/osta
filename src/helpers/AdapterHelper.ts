@@ -16,11 +16,15 @@ async function getValueForVariable(extension: Extension, variableName: unknown):
   })
 }
 
-async function setValueForHelper(extension: Extension, variableName: string, variable: unknown): Promise<void> {
+async function setValueForVariable(extension: Extension, variableName: string, variable: unknown): Promise<void> {
   extension.variables.push(variableName)
 
   await IonicStorage.set(`${extension.name}-extension-v${extension.version}-variable-${variableName}`, variable)
   await ExtensionRepository.addExtension(extension)
 }
 
-export default { setValueForHelper, getValueForVariable }
+async function removeValueForVariable(extension: Extension, variableName: unknown): Promise<void> {
+  await IonicStorage.remove(`${extension.name}-extension-v${extension.version}-variable-${variableName}`)
+}
+
+export default { getValueForVariable, setValueForVariable, removeValueForVariable }

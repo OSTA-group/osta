@@ -1,4 +1,4 @@
-.compassCard {
+.compass-card {
     max-height: 10em;
     display: flex;
     position: absolute;
@@ -9,7 +9,7 @@
     width: 75%;
 }
 
-.compassCard__text {
+.compass-card__text {
     width: auto;
     height: auto;
     flex-grow: 1;
@@ -17,9 +17,9 @@
     align-items: center;
 }
 
-.compassCard__image ion-img{
-    height: 100px;
-    width: 90%;
+.compass-card__image ion-img {
+    height: 110px;
+    width: 110px;
 }
 
 .image__dark {
@@ -30,7 +30,7 @@
     display: block;
 }
 
-@media(prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
     .image__dark {
         display: block;
     }

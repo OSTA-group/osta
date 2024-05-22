@@ -4,6 +4,7 @@
  */
 
 import { Extension } from '../types'
+import IonicStorage from '../databases/IonicStorage'
 
 /**
  * Retrieves the value for a variable for a specified extension.
@@ -15,10 +16,18 @@ import { Extension } from '../types'
 declare async function getValueForVariable(extension: Extension, variableName: unknown): Promise<unknown>
 
 /**
- * Sets the value for a variable in a specified data source.
+ * Sets the value for a variable for a specifiec extension.
  * @param {Extension} extension The extension for which to set the variable.
  * @param {string} variableName The name of the variable to set.
  * @param {unknown} variable The value to set for the variable.
  * @returns {Promise<void>} A Promise that resolves when the variable value is set.
  */
-declare async function setValueForHelper(extension: Extension, variableName: string, variable: unknown): Promise<void>
+declare async function setValueForVariable(extension: Extension, variableName: string, variable: unknown): Promise<void>
+
+/**
+ * Removes the value of a variable for a specifiec extension.
+ * @param {Extension} extension The extension for which to remove the variable.
+ * @param {string} variableName The name of the variable to remove
+ * @returns {Promise<void>} A Promise that resolves when the variable value is removed.
+ */
+declare async function removeValueForVariable(extension: Extension, variableName: unknown): Promise<void>

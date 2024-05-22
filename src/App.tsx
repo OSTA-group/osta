@@ -32,7 +32,7 @@ import { Dialog } from '@capacitor/dialog'
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AreasSettingsScreen } from './pages/settings/AreasSettingsScreen'
 import { ExtensionsSettingsScreen } from './pages/settings/ExtensionsSettingsScreen'
-import { LandmarkDetail } from './pages/LandmarkDetail'
+import { LandmarkDetailScreen } from './pages/LandmarkDetailScreen'
 import { CreateTripScreen } from './pages/trip/CreateTripScreen'
 import { OrganiseTripScreen } from './pages/trip/OrganiseTripScreen'
 import CompassService from './services/CompassService'
@@ -108,7 +108,7 @@ export default function App() {
             <Route path={'/settings/extensions'} component={ExtensionsSettingsScreen} />
             <Route path={'/marketplace'} component={MarketplaceScreen} />
             <Route path={'/extensions/:extensionName'} component={ExtensionPropertiesScreen} />
-            <Route path={'/landmark/:landmarkId'} component={LandmarkDetail} />
+            <Route path={'/landmark/:landmarkId'} component={LandmarkDetailScreen} />
             <Route path={'/trip/create'} component={CreateTripScreen} />
             <Route path={'/trip/plan'} component={OrganiseTripScreen} />
             <Route path={'/map'} component={MapScreen} />
