@@ -26,6 +26,7 @@
     "entryFileName": "Home.md",
     "hidePageHeader": true,
     "flattenOutputFiles": true,
+    "membersWithOwnFile": ["Class", "Enum", "Interface", "Function"],
     "sidebar": {
       "autoConfiguration": true,
       "heading": "API"
