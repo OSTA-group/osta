@@ -13,7 +13,7 @@
  * @property {boolean} visited Indicates if the landmark has been visited.
  * @property {boolean} inTrip Indicates if the landmark is part of the current trip.
  */
-declare export type Landmark = {
+export type Landmark = {
   id: string
   location: Location
   types: string[]
@@ -30,7 +30,7 @@ declare export type Landmark = {
  * @property {Landmark[]} landmarks The landmarks included in the trip.
  * @property {boolean} isLastVisited Indicates if the last landmark has been visited.
  */
-declare export type Trip = {
+export type Trip = {
   nextLandmarkId: number
   started: boolean
   landmarks: Landmark[]
@@ -43,7 +43,7 @@ declare export type Trip = {
  * @property {string} description A description of the source.
  * @property {string} source The source itself.
  */
-declare export type SourceInformation = {
+export type SourceInformation = {
   name: string
   description: string
   source: string
