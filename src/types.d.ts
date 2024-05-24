@@ -1,6 +1,6 @@
 /**
  * @packageDocumentation
- * File containing all type declaration for the project.
+ * File containing all type declarations for the project.
  */
 
 /**
