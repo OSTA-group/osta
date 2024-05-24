@@ -14,16 +14,10 @@ const pageName = 'Extension properties'
 interface ExtensionPropertiesScreenProperties
   extends RouteComponentProps<{
     extensionName: string
-  }> {
-}
+  }> {}
 
 export function ExtensionPropertiesScreen({ match }: ExtensionPropertiesScreenProperties) {
-  const {
-    extension,
-    isGettingExtension,
-    isErrorGettingExtension,
-    putConfiguration,
-  } = useExtension(match.params.extensionName)
+  const { extension, isGettingExtension, isErrorGettingExtension, putConfiguration } = useExtension(match.params.extensionName)
   const [inputValues, setInputValues] = useState<Record<string, unknown>>({})
   const methods = useForm()
   const history = useHistory()
@@ -31,7 +25,7 @@ export function ExtensionPropertiesScreen({ match }: ExtensionPropertiesScreenPr
   useEffect(() => {
     // Load values of extension variables if they are already present in local storage
     if (extension) {
-      ExtensionService.getExtensionConfigurationVariables(extension).then(variables => setInputValues(variables))
+      ExtensionService.getExtensionConfigurationVariables(extension).then((variables) => setInputValues(variables))
     }
   }, [extension])
 
@@ -61,16 +55,16 @@ export function ExtensionPropertiesScreen({ match }: ExtensionPropertiesScreenPr
           {extension &&
             extension.configurationVariables &&
             extension.configurationVariables.map((configurationVariable: ExtensionConfigurationVariable) => (
-                <ExtensionConfigurationVariableInput
-                  key={configurationVariable.name}
-                  configurationVariable={configurationVariable}
-                  value={inputValues[configurationVariable.name] as string}
-                  onInputChange={(value: string) => handleInputChange(configurationVariable.name, value)}
-                />
+              <ExtensionConfigurationVariableInput
+                key={configurationVariable.name}
+                configurationVariable={configurationVariable}
+                value={inputValues[configurationVariable.name] as string}
+                onInputChange={(value: string) => handleInputChange(configurationVariable.name, value)}
+              />
             ))}
 
           {extension && extension.configurationVariables && (
-            <IonButton className={"ion-margin-top"} type={'submit'}>
+            <IonButton className={'ion-margin-top'} type={'submit'}>
               Save properties
             </IonButton>
           )}

@@ -11,18 +11,26 @@ interface ExtensionConfigurationVariableInputProperties {
 }
 
 export function ExtensionConfigurationVariableInput({
-                                                      configurationVariable,
-                                                      value,
-                                                      onInputChange,
-                                                    }: ExtensionConfigurationVariableInputProperties) {
+  configurationVariable,
+  value,
+  onInputChange,
+}: ExtensionConfigurationVariableInputProperties) {
   const { title, type, options, required } = configurationVariable
-  const { register, formState: { errors } } = useFormContext()
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext()
 
   if (type === 'select' && options && options.length > 0) {
     return (
       <>
         <IonItem>
-          <IonSelect label={'Pick a ' + title} value={value} onIonChange={event => onInputChange(event.target.value)} {...register(configurationVariable.name, { required })}>
+          <IonSelect
+            label={'Pick a ' + title + (required ? ' *' : '')}
+            value={value}
+            onIonChange={(event) => onInputChange(event.target.value)}
+            {...register(configurationVariable.name, { required })}
+          >
             {options.map((option, index) => (
               <IonSelectOption key={index} value={option.value}>
                 {option.name}
@@ -40,7 +48,7 @@ export function ExtensionConfigurationVariableInput({
           <IonInput
             required={required}
             type={type as TextFieldTypes}
-            label={title}
+            label={title + (required ? ' *' : '')}
             value={value}
             labelPlacement={'floating'}
             {...register(configurationVariable.name, { required })}
