@@ -1,4 +1,9 @@
 /**
+ * @packageDocumentation
+ * File containing all type declaration for the project.
+ */
+
+/**
  * Represents a landmark.
  * @property {string} id The unique identifier of the landmark, composed of rounding and then combining the latitude and longitude.
  * @property {Location} location The geographical location of the landmark.
@@ -8,7 +13,7 @@
  * @property {boolean} visited Indicates if the landmark has been visited.
  * @property {boolean} inTrip Indicates if the landmark is part of the current trip.
  */
-export type Landmark = {
+declare export type Landmark = {
   id: string
   location: Location
   types: string[]
@@ -25,7 +30,7 @@ export type Landmark = {
  * @property {Landmark[]} landmarks The landmarks included in the trip.
  * @property {boolean} isLastVisited Indicates if the last landmark has been visited.
  */
-export type Trip = {
+declare export type Trip = {
   nextLandmarkId: number
   started: boolean
   landmarks: Landmark[]
@@ -38,7 +43,7 @@ export type Trip = {
  * @property {string} description A description of the source.
  * @property {string} source The source itself.
  */
-export type SourceInformation = {
+declare export type SourceInformation = {
   name: string
   description: string
   source: string

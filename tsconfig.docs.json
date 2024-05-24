@@ -21,6 +21,14 @@
   "exclude": ["src/vite-env.d.ts"],
   "typedocOptions": {
     "entryPoints": ["main.tsx"],
-    "out": "docs"
+    "plugin": ["typedoc-plugin-markdown", "typedoc-github-wiki-theme"],
+    "out": "docs",
+    "entryFileName": "Home.md",
+    "hidePageHeader": true,
+    "flattenOutputFiles": true,
+    "sidebar": {
+      "autoConfiguration": true,
+      "heading": "API"
+    }
   }
 }
