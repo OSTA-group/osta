@@ -1,6 +1,6 @@
 /**
  * @packageDocumentation
- * Service to track and and request the devices compass' rotation.
+ * Service to track and request the devices compass' rotation.
  */
 
 /**

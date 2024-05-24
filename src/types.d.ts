@@ -1,4 +1,9 @@
 /**
+ * @packageDocumentation
+ * File containing all type declarations for the project.
+ */
+
+/**
  * Represents a landmark.
  * @property {string} id The unique identifier of the landmark, composed of rounding and then combining the latitude and longitude.
  * @property {Location} location The geographical location of the landmark.

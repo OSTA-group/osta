@@ -11,7 +11,7 @@ In order to build the app make sure you have the following installed:
 ### Installing
 In case the Ionic framework has not been installed, install this first
 ```bash
-npm install --global ionic
+npm install --global @ionic/cli
 ```
 
 #### Running in webbrowser

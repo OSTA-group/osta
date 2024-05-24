@@ -13,7 +13,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "lint": "eslint",
-    "documentation": "npx typedoc src/**/*.d.ts --entryPointStrategy expand --tsconfig tsconfig.docs.json"
+    "documentation": "npx typedoc src/**/*.d.ts src/types.d.ts --entryPointStrategy expand --tsconfig tsconfig.docs.json"
   },
   "dependencies": {
     "@bopen/leaflet-area-selection": "^0.7.0",
@@ -79,6 +79,8 @@
     "prettier": "^3.2.5",
     "terser": "^5.4.0",
     "typedoc": "^0.25.13",
+    "typedoc-github-wiki-theme": "^2.0.0",
+    "typedoc-plugin-markdown": "^4.0.2",
     "typescript": "^5.1.6",
     "typescript-eslint": "^7.7.1",
     "vite": "^5.0.0",
