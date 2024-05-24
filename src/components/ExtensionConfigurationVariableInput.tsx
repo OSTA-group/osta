@@ -22,7 +22,7 @@ export function ExtensionConfigurationVariableInput({
     return (
       <>
         <IonItem>
-          <IonSelect label={'Pick a ' + title} {...register(configurationVariable.name, { required })}>
+          <IonSelect label={'Pick a ' + title} value={value} onIonChange={event => onInputChange(event.target.value)} {...register(configurationVariable.name, { required })}>
             {options.map((option, index) => (
               <IonSelectOption key={index} value={option.value}>
                 {option.name}

@@ -19,6 +19,7 @@ import '@ionic/react/css/display.css'
 
 /* Theme variables */
 import '@ionic/react/css/palettes/dark.system.css'
+import './components/css/fonts/index.css'
 import './theme/variables.css'
 
 /* App imports */
@@ -44,8 +45,8 @@ import WebAdapter from './adapter/WebAdapter'
 import PythonAdapter from './adapter/PythonAdapter'
 import axios from 'axios'
 import { MarketplaceScreen } from './pages/MarketplaceScreen'
-import './components/css/fonts/index.css'
 import { ExtensionPropertiesScreen } from './pages/settings/ExtensionPropertiesScreen'
+import { Trip } from './types'
 
 setupIonicReact()
 
@@ -54,6 +55,8 @@ export default function App() {
   useEffect(() => {
     const setupStore = async () => {
       IonicStorage.createStore('OstaDB')
+
+      await IonicStorage.get('trip').catch(async () => await IonicStorage.set('trip', {landmarks: [], started: false, nextLandmarkId: -1, isLastVisited: false} as Trip))
     }
 
     setupStore()
