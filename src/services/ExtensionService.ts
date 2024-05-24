@@ -34,8 +34,8 @@ async function deleteExtension(extensionName: string): Promise<void> {
   }
 
   // Remove variables
-  for(const variable in installedExtension.variables) {
-    await AdapterHelper.removeValueForVariable(installedExtension, variable)
+  for(const index in installedExtension.variables) {
+    await AdapterHelper.removeValueForVariable(installedExtension, installedExtension.variables[index])
   }
 
   if (installedExtension) {
@@ -55,12 +55,13 @@ async function getExtensionConfigurationVariables(extension: Extension): Promise
   for (const variableName of extension.variables) {
     variables[variableName] = await AdapterHelper.getValueForVariable(extension, variableName);
   }
-  
+
   return variables
 }
 
 async function changeConfigurationForExtension(extension: Extension, configuration: { [key: string]: unknown }): Promise<void> {
   for (const key of Object.keys(configuration)) {
+    console.log(key, configuration[key])
     await AdapterHelper.setValueForVariable(extension, key, configuration[key])
   }
 
