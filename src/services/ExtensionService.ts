@@ -61,7 +61,6 @@ async function getExtensionConfigurationVariables(extension: Extension): Promise
 
 async function changeConfigurationForExtension(extension: Extension, configuration: { [key: string]: unknown }): Promise<void> {
   for (const key of Object.keys(configuration)) {
-    console.log(key, configuration[key])
     await AdapterHelper.setValueForVariable(extension, key, configuration[key])
   }
 
