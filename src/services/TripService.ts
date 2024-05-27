@@ -23,6 +23,7 @@ async function removeLandmarkFromTrip(landmark: Landmark): Promise<void> {
 async function startTrip(): Promise<void> {
   const trip = (await IonicStorage.get('trip')) as Trip
   trip.started = true
+  trip.nextLandmarkId = 0
   await IonicStorage.set('trip', trip)
 }
 
