@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package io.osta;
 
 import com.getcapacitor.BridgeActivity;
 

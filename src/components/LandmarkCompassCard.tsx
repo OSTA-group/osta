@@ -18,7 +18,7 @@ export function LandmarkCompassCard({ landmark, currentLandmarkNumber, totalLand
   const userDirection = useCompassDirection()
 
   const distanceToNextPoint = LocationHelper.getDisplayStringForDistanceInKm(landmark.location, location)
-  const rotationToNextPoint = (-(LocationHelper.calculateAngleInDegrees(landmark.location, location) + userDirection) % 360) + 180
+  const rotationToNextPoint = (-(LocationHelper.calculateAngleInDegrees(landmark.location, location) + userDirection) % 360) + 135
 
   const title = landmark.sources[0].name
 
