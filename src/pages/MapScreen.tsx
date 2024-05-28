@@ -24,7 +24,7 @@ export function MapScreen() {
   const userDirection = useCompassDirection()
 
   const mapDataLoaded = !isGettingLandmarks && !isErrorGettingLandmarks && !isGettingTrip && !isErrorGettingTrip && landmarks && trip
-  const errorLoadingData = isErrorGettingLandmarks || isErrorGettingTrip || !landmarks || !trip
+  const errorLoadingData = isErrorGettingLandmarks || isErrorGettingTrip
   const locationNotEnabled = currentPosition.lat === 0 && currentPosition.lng === 0
 
   const cancelTrip = () => {
@@ -113,63 +113,67 @@ export function MapScreen() {
         </OfflineMapContainer>
 
         {/* TRIP NOT STARTED */}
-        {!trip.started && (
+        {trip && (
           <>
-            <IonFabButton className="btn__home btn__planTrip btn__color" routerLink={'/trip/create'}>
-              <IonIcon icon={mapOutline}></IonIcon>
-            </IonFabButton>
-
-            <IonFab slot="fixed" color="" vertical="top" horizontal="end">
-              <IonFabButton color="light">
-                <IonIcon icon={settingsOutline}></IonIcon>
-              </IonFabButton>
-              <IonFabList side="bottom">
-                <IonFabButton routerLink="/settings/extensions">
-                  <IonIcon icon={folderOpenOutline}></IonIcon>
+            {!trip.started && (
+              <>
+                <IonFabButton className="btn__home btn__planTrip btn__color" routerLink={'/trip/create'}>
+                  <IonIcon icon={mapOutline}></IonIcon>
                 </IonFabButton>
-                <IonFabButton routerLink="/settings/areas">
-                  <IonIcon icon={businessOutline}></IonIcon>
-                </IonFabButton>
-              </IonFabList>
-            </IonFab>
-          </>
-        )}
 
-        {/* TRIP STARTED AND NOT THE LAST LANDMARK */}
-        {trip.started && (
-          <>
-            {!trip.isLastVisited && (
-              <LandmarkCompassCard
-                landmark={trip.landmarks[trip.nextLandmarkId]}
-                currentLandmarkNumber={trip.nextLandmarkId + 1}
-                totalLandmarks={trip.landmarks.length}
-              />
+                <IonFab slot="fixed" color="" vertical="top" horizontal="end">
+                  <IonFabButton color="light">
+                    <IonIcon icon={settingsOutline}></IonIcon>
+                  </IonFabButton>
+                  <IonFabList side="bottom">
+                    <IonFabButton routerLink="/settings/extensions">
+                      <IonIcon icon={folderOpenOutline}></IonIcon>
+                    </IonFabButton>
+                    <IonFabButton routerLink="/settings/areas">
+                      <IonIcon icon={businessOutline}></IonIcon>
+                    </IonFabButton>
+                  </IonFabList>
+                </IonFab>
+              </>
             )}
 
-            <IonFabButton className="btn__home btn__endTrip" color="danger" onClick={cancelTrip}>
-              <IonIcon icon={squareOutline}></IonIcon>
-            </IonFabButton>
-          </>
-        )}
+            {/* TRIP STARTED AND NOT THE LAST LANDMARK */}
+            {trip.started && (
+              <>
+                {!trip.isLastVisited && (
+                  <LandmarkCompassCard
+                    landmark={trip.landmarks[trip.nextLandmarkId]}
+                    currentLandmarkNumber={trip.nextLandmarkId + 1}
+                    totalLandmarks={trip.landmarks.length}
+                  />
+                )}
 
-        {/* LAST LANDMARK VISITED */}
-        {trip.isLastVisited && (
-          <IonAlert
-            isOpen={true}
-            header="Looks like you're done!"
-            message="The trip has ended."
-            buttons={[
-              {
-                text: 'Cancel',
-                role: 'cancel',
-              },
-              {
-                text: 'OK!',
-                role: 'confirm',
-                handler: () => cancelTrip(),
-              },
-            ]}
-          ></IonAlert>
+                <IonFabButton className="btn__home btn__endTrip" color="danger" onClick={cancelTrip}>
+                  <IonIcon icon={squareOutline}></IonIcon>
+                </IonFabButton>
+              </>
+            )}
+
+            {/* LAST LANDMARK VISITED */}
+            {trip.isLastVisited && (
+              <IonAlert
+                isOpen={true}
+                header="Looks like you're done!"
+                message="The trip has ended."
+                buttons={[
+                  {
+                    text: 'Cancel',
+                    role: 'cancel',
+                  },
+                  {
+                    text: 'OK!',
+                    role: 'confirm',
+                    handler: () => cancelTrip(),
+                  },
+                ]}
+              />
+            )}
+          </>
         )}
       </IonContent>
     </IonPage>
