@@ -1,8 +1,8 @@
-import { Extension, MarketplaceExtension, ExtensionConfigurationVariable } from '../types'
-import ExtensionRepository from '../repository/ExtensionRepository'
 import TypeAdapter from '../adapter/TypeAdapter'
+import ExtensionApi from '../api/ExtensionApi'
 import AdapterHelper from '../helpers/AdapterHelper'
-import axios from 'axios'
+import ExtensionRepository from '../repository/ExtensionRepository'
+import { Extension, MarketplaceExtension } from '../types'
 
 async function downloadNewExtension(extension: MarketplaceExtension): Promise<void> {
   const installedExtension = await ExtensionRepository.getExtensionByName(extension.name)
@@ -18,7 +18,7 @@ async function downloadNewExtension(extension: MarketplaceExtension): Promise<vo
     newExtension.variables = []
 
     if (extension.configurationUrl) {
-      newExtension.configurationVariables = await getExtensionConfiguration(extension)
+      newExtension.configurationVariables = await ExtensionApi.downloadExtensionConfiguration(extension)
       newExtension.configured = false
     }
 
@@ -29,12 +29,12 @@ async function downloadNewExtension(extension: MarketplaceExtension): Promise<vo
 async function deleteExtension(extensionName: string): Promise<void> {
   const installedExtension = await ExtensionRepository.getExtensionByName(extensionName)
 
-  if(!installedExtension) {
+  if (!installedExtension) {
     throw new Error(`Extension ${extensionName} not found, aborting deletion`)
   }
 
   // Remove variables
-  for(const index in installedExtension.variables) {
+  for (const index in installedExtension.variables) {
     await AdapterHelper.removeValueForVariable(installedExtension, installedExtension.variables[index])
   }
 
@@ -44,16 +44,11 @@ async function deleteExtension(extensionName: string): Promise<void> {
   }
 }
 
-async function getExtensionConfiguration(extension: MarketplaceExtension): Promise<ExtensionConfigurationVariable[]> {
-  const result = await axios.get<ExtensionConfigurationVariable[]>(extension.configurationUrl)
-  return result.data
-}
-
 async function getExtensionConfigurationVariables(extension: Extension): Promise<Record<string, unknown>> {
   const variables: Record<string, unknown> = {}
 
   for (const variableName of extension.variables) {
-    variables[variableName] = await AdapterHelper.getValueForVariable(extension, variableName);
+    variables[variableName] = await AdapterHelper.getValueForVariable(extension, variableName)
   }
 
   return variables
@@ -68,4 +63,9 @@ async function changeConfigurationForExtension(extension: Extension, configurati
   await ExtensionRepository.addExtension(extension)
 }
 
-export default { downloadNewExtension, deleteExtension, getExtensionConfigurationVariables, changeConfigurationForExtension }
+export default {
+  downloadNewExtension,
+  deleteExtension,
+  getExtensionConfigurationVariables,
+  changeConfigurationForExtension,
+}

@@ -1,5 +1,5 @@
-import LocationHelper from '../src/helpers/LocationHelper'
-import { BoundingBox } from '../src/types'
+import LocationHelper from '../../src/helpers/LocationHelper'
+import { BoundingBox } from '../../src/types'
 
 describe('Function calculate distance should run with success', () => {
   it('calculates distance between two known locations', () => {
