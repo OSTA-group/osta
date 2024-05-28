@@ -38,11 +38,11 @@ export function LandmarkDetailScreen({ match }: UserDetailPageProps) {
 
   const [checkboxClicked, setCheckboxClicked] = useState(false)
 
-  function handleCheckBoxChange(checked: boolean) {
+  function handleCheckBoxChange(checked: boolean, inTrip: boolean) {
     if (!checkboxClicked) {
       putIsVisited(checked)
       setCheckboxClicked(true)
-      if (trip?.started) {
+      if (trip?.started && inTrip) {
         changeToNextLandmark()
       }
     }
@@ -111,7 +111,7 @@ export function LandmarkDetailScreen({ match }: UserDetailPageProps) {
             <IonCheckbox
               value={landmarkDetails.visited}
               checked={landmarkDetails.visited}
-              onIonChange={(e) => handleCheckBoxChange(e.target.checked)}
+              onIonChange={(e) => handleCheckBoxChange(e.target.checked, landmarkDetails.inTrip)}
             >
               Mark this landmark as seen
             </IonCheckbox>
