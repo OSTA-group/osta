@@ -26,12 +26,16 @@ function getDisplayStringForDistanceInKm(location1: Location, location2: Locatio
 }
 
 function calculateAngleInDegrees(location1: Location, location2: Location): number {
-  const dLon = deg2rad(location2.lng - location1.lng)
+  const startLat = deg2rad(location1.lat);
+  const startLng = deg2rad(location1.lng);
+  const destLat = deg2rad(location2.lat);
+  const destLng = deg2rad(location2.lng);
 
-  const y = Math.sin(dLon) * Math.cos(location2.lat)
-  const x = Math.cos(location1.lat) * Math.sin(location2.lat) - Math.sin(location1.lat) * Math.cos(location2.lat) * Math.cos(dLon)
-
-  return rad2deg(Math.atan2(y, x))
+  const y = Math.sin(destLng - startLng) * Math.cos(destLat);
+  const x = Math.cos(startLat) * Math.sin(destLat) - Math.sin(startLat) * Math.cos(destLat) * Math.cos(destLng - startLng);
+  let bearing = Math.atan2(y, x);
+  bearing = rad2deg(bearing);
+  return (bearing + 360) % 360;
 }
 
 function calculateRadiusByBoundingBox(area: BoundingBox): BoundingCircle {
