@@ -111,7 +111,7 @@ export function LandmarkDetailScreen({ match }: UserDetailPageProps) {
             <IonCheckbox
               value={landmarkDetails.visited}
               checked={landmarkDetails.visited}
-              onIonChange={(e) => handleCheckBoxChange(e.target.checked, landmarkDetails?.inTrip)}
+              onIonChange={(e) => handleCheckBoxChange(e.target.checked, landmarkDetails.inTrip)}
             >
               Mark this landmark as seen
             </IonCheckbox>
