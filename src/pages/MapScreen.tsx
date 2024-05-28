@@ -89,7 +89,7 @@ export function MapScreen() {
                           markerIcon={MarkerHelper.getUnvisitedInTripMarker()}
                           markerIconVisited={MarkerHelper.getVisitedInTripMarker()}
                         />
-                      ),
+                      )
                   )}
 
                   {/* CLUSTER FOR LANDMARK NOT IN A TRIP */}
@@ -103,7 +103,7 @@ export function MapScreen() {
                             markerIcon={MarkerHelper.getUnvisitedMarker()}
                             markerIconVisited={MarkerHelper.getVisitedMarker()}
                           />
-                        ),
+                        )
                     )}
                   </MarkerClusterGroup>
                 </>
