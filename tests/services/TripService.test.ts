@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import IonicStorage from '../../src/databases/IonicStorage'
 import LandmarkRepository from '../../src/repository/LandmarkRepository'
 import TripService from '../../src/services/TripService'
-import { Landmark } from '../../src/types'
+import { Landmark, Trip } from '../../src/types'
 
 vi.mock('../../src/databases/IonicStorage', () => ({
   default: {
@@ -36,7 +36,7 @@ describe('Trip functions', () => {
   })
 
   it('removeLandmarkFromTrip should remove landmark from trip and update storage', async () => {
-    const mockLandmark = { id: 1 }
+    const mockLandmark = { id: '1' } as Landmark
     const mockTrip = { landmarks: [mockLandmark] }
 
     IonicStorage.get.mockResolvedValue(mockTrip)
@@ -49,7 +49,7 @@ describe('Trip functions', () => {
   })
 
   it('startTrip should update trip status and update storage', async () => {
-    const mockTrip = { started: false }
+    const mockTrip = { started: true, landmarks: [], nextLandmarkId: -1, isLastVisited: true } as Trip
 
     IonicStorage.get.mockResolvedValue(mockTrip)
 
@@ -61,9 +61,9 @@ describe('Trip functions', () => {
   })
 
   it('endTrip should update trip status and clear trip data', async () => {
-    const mockLandmark1 = { id: 1 }
-    const mockLandmark2 = { id: 2 }
-    const mockTrip = { started: true, landmarks: [mockLandmark1, mockLandmark2] }
+    const mockLandmark1 = { id: '1' } as Landmark
+    const mockLandmark2 = { id: '2' } as Landmark
+    const mockTrip = { started: true, landmarks: [mockLandmark1, mockLandmark2], nextLandmarkId: 1, isLastVisited: true } as Trip
 
     IonicStorage.get.mockResolvedValue(mockTrip)
 
@@ -78,9 +78,9 @@ describe('Trip functions', () => {
   })
 
   it('flipOrder should flip the order of landmarks and update storage', async () => {
-    const mockLandmark1 = { id: 1 }
-    const mockLandmark2 = { id: 2 }
-    const mockTrip = { landmarks: [mockLandmark1, mockLandmark2] }
+    const mockLandmark1 = { id: '1' } as Landmark
+    const mockLandmark2 = { id: '2' } as Landmark
+    const mockTrip = { started: false, landmarks: [mockLandmark1, mockLandmark2], nextLandmarkId: 0, isLastVisited: false } as Trip
 
     IonicStorage.get.mockResolvedValue(mockTrip)
 
@@ -91,9 +91,9 @@ describe('Trip functions', () => {
   })
 
   it('setNextLandmarkInTrip should increment nextLandmarkId and update storage', async () => {
-    const mockLandmark1 = { id: 1 }
-    const mockLandmark2 = { id: 2 }
-    const mockTrip = { nextLandmarkId: 0, landmarks: [mockLandmark1, mockLandmark2] }
+    const mockLandmark1 = { id: '1' } as Landmark
+    const mockLandmark2 = { id: '2' } as Landmark
+    const mockTrip = { started: false, landmarks: [mockLandmark1, mockLandmark2], nextLandmarkId: 0, isLastVisited: false } as Trip
 
     IonicStorage.get.mockResolvedValue(mockTrip)
 

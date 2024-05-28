@@ -157,7 +157,9 @@ describe('getExtensionConfigurationVariables', () => {
 
   it('should return configuration variables for an extension', async () => {
     const mockVariables = { variable1: 'value1', variable2: 'value2' }
-    AdapterHelper.getValueForVariable.mockImplementation((extension, variableName) => Promise.resolve(mockVariables[variableName]))
+    AdapterHelper.getValueForVariable.mockImplementation((extension: unknown, variableName: string) =>
+      Promise.resolve(mockVariables[variableName])
+    )
 
     const result = await ExtensionService.getExtensionConfigurationVariables(mockInstalledExtension)
 
