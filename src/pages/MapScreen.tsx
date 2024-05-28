@@ -24,7 +24,7 @@ export function MapScreen() {
   const userDirection = useCompassDirection()
 
   const mapDataLoaded = !isGettingLandmarks && !isErrorGettingLandmarks && !isGettingTrip && !isErrorGettingTrip && landmarks && trip
-  const errorLoadingData = isErrorGettingLandmarks || isErrorGettingTrip || !landmarks || !trip
+  const errorLoadingData = isErrorGettingLandmarks || isErrorGettingTrip
   const locationNotEnabled = currentPosition.lat === 0 && currentPosition.lng === 0
 
   const cancelTrip = () => {
@@ -89,7 +89,7 @@ export function MapScreen() {
                           markerIcon={MarkerHelper.getUnvisitedInTripMarker()}
                           markerIconVisited={MarkerHelper.getVisitedInTripMarker()}
                         />
-                      )
+                      ),
                   )}
 
                   {/* CLUSTER FOR LANDMARK NOT IN A TRIP */}
@@ -103,7 +103,7 @@ export function MapScreen() {
                             markerIcon={MarkerHelper.getUnvisitedMarker()}
                             markerIconVisited={MarkerHelper.getVisitedMarker()}
                           />
-                        )
+                        ),
                     )}
                   </MarkerClusterGroup>
                 </>
@@ -113,27 +113,29 @@ export function MapScreen() {
         </OfflineMapContainer>
 
         {/* TRIP NOT STARTED */}
-        {!trip.started && (
+        {trip && (
           <>
-            <IonFabButton className="btn__home btn__planTrip btn__color" routerLink={'/trip/create'}>
-              <IonIcon icon={mapOutline}></IonIcon>
-            </IonFabButton>
+            {!trip.started && (
+              <>
+                <IonFabButton className="btn__home btn__planTrip btn__color" routerLink={'/trip/create'}>
+                  <IonIcon icon={mapOutline}></IonIcon>
+                </IonFabButton>
 
-            <IonFab slot="fixed" color="" vertical="top" horizontal="end">
-              <IonFabButton color="light">
-                <IonIcon icon={settingsOutline}></IonIcon>
-              </IonFabButton>
-              <IonFabList side="bottom">
-                <IonFabButton routerLink="/settings/extensions">
-                  <IonIcon icon={folderOpenOutline}></IonIcon>
-                </IonFabButton>
-                <IonFabButton routerLink="/settings/areas">
-                  <IonIcon icon={businessOutline}></IonIcon>
-                </IonFabButton>
-              </IonFabList>
-            </IonFab>
-          </>
-        )}
+                <IonFab slot="fixed" color="" vertical="top" horizontal="end">
+                  <IonFabButton color="light">
+                    <IonIcon icon={settingsOutline}></IonIcon>
+                  </IonFabButton>
+                  <IonFabList side="bottom">
+                    <IonFabButton routerLink="/settings/extensions">
+                      <IonIcon icon={folderOpenOutline}></IonIcon>
+                    </IonFabButton>
+                    <IonFabButton routerLink="/settings/areas">
+                      <IonIcon icon={businessOutline}></IonIcon>
+                    </IonFabButton>
+                  </IonFabList>
+                </IonFab>
+              </>
+            )}
 
         {/* TRIP STARTED AND NOT THE LAST LANDMARK */}
         {trip.started && (
@@ -170,6 +172,8 @@ export function MapScreen() {
               },
             ]}
           ></IonAlert>
+        )}
+          </>
         )}
       </IonContent>
     </IonPage>
