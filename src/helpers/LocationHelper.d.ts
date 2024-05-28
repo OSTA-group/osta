@@ -23,8 +23,9 @@ declare function getDisplayStringForDistanceInKm(location1: Location, location2:
 
 /**
  * Calculates the angle in degrees between two locations.
- * @param {Location} location1 The first location.
- * @param {Location} location2 The second location.
+ * The order of the 2 locations matters, the first location is the origin and the second location is the destination.
+ * @param {Location} location1 The first locations (origin location).
+ * @param {Location} location2 The second location (destination location).
  * @returns {number} The angle in degrees between the two locations.
  */
 declare function calculateAngleInDegrees(location1: Location, location2: Location): number
