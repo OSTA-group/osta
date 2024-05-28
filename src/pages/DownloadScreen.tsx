@@ -113,7 +113,7 @@ export function DownloadScreen() {
       </IonButton>
 
       {/* Modal for entering area name */}
-      <IonModal isOpen={isModalOpen}>
+      <IonModal isOpen={isModalOpen} onWillDismiss={() => setIsModalOpen(false)}>
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
