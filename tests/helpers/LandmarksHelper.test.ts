@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import LocationService from '../../src/services/LocationService'
 import LandmarkHelper from '../../src/helpers/LandmarksHelper'
+import { Landmark } from '../../src/types'
 
 vi.mock('../../src/services/LocationService', () => ({
   default: {
@@ -32,18 +33,18 @@ describe('orderByDistanceFromUser', () => {
     LocationService.getUserLocation.mockReturnValue({ lat: 40.7128, lng: -74.006 })
 
     const landmarks = [
-      { id: 1, location: { lat: 40.7128, lng: -74.006 } },
-      { id: 2, location: { lat: 34.0522, lng: -118.2437 } },
-      { id: 3, location: { lat: 51.5074, lng: -0.1278 } },
-    ]
+      { id: '1', location: { lat: 40.7128, lng: -74.006 } },
+      { id: '2', location: { lat: 51.5074, lng: -0.1278 } },
+      { id: '3', location: { lat: 34.0522, lng: -118.2437 } },
+    ] as Landmark[]
 
     const sortedLandmarks = LandmarkHelper.orderByDistanceFromUser(landmarks)
 
     // Expectation: landmarks should be sorted by distance from user location
     expect(sortedLandmarks).toEqual([
-      { id: 1, location: { lat: 40.7128, lng: -74.006 } },
-      { id: 2, location: { lat: 34.0522, lng: -118.2437 } },
-      { id: 3, location: { lat: 51.5074, lng: -0.1278 } },
+      { id: '1', location: { lat: 40.7128, lng: -74.006 } },
+      { id: '3', location: { lat: 34.0522, lng: -118.2437 } },
+      { id: '2', location: { lat: 51.5074, lng: -0.1278 } },
     ])
   })
 })
