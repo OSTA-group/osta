@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import TypeAdapter from '../../src/adapter/TypeAdapter'
 import ExtensionApi from '../../src/api/ExtensionApi'
 import AdapterHelper from '../../src/helpers/AdapterHelper'
@@ -6,7 +6,6 @@ import ExtensionRepository from '../../src/repository/ExtensionRepository'
 import ExtensionService from '../../src/services/ExtensionService'
 import { Extension, MarketplaceExtension } from '../../src/types'
 
-// Mocking dependencies
 vi.mock('../../src/repository/ExtensionRepository', () => ({
   default: {
     getExtensionByName: vi.fn(),
