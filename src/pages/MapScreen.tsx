@@ -171,7 +171,7 @@ export function MapScreen() {
                     handler: () => cancelTrip(),
                   },
                 ]}
-              ></IonAlert>
+              />
             )}
           </>
         )}
