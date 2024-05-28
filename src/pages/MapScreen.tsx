@@ -137,42 +137,42 @@ export function MapScreen() {
               </>
             )}
 
-        {/* TRIP STARTED AND NOT THE LAST LANDMARK */}
-        {trip.started && (
-          <>
-            {!trip.isLastVisited && (
-              <LandmarkCompassCard
-                landmark={trip.landmarks[trip.nextLandmarkId]}
-                currentLandmarkNumber={trip.nextLandmarkId + 1}
-                totalLandmarks={trip.landmarks.length}
-              />
+            {/* TRIP STARTED AND NOT THE LAST LANDMARK */}
+            {trip.started && (
+              <>
+                {!trip.isLastVisited && (
+                  <LandmarkCompassCard
+                    landmark={trip.landmarks[trip.nextLandmarkId]}
+                    currentLandmarkNumber={trip.nextLandmarkId + 1}
+                    totalLandmarks={trip.landmarks.length}
+                  />
+                )}
+
+                <IonFabButton className="btn__home btn__endTrip" color="danger" onClick={cancelTrip}>
+                  <IonIcon icon={squareOutline}></IonIcon>
+                </IonFabButton>
+              </>
             )}
 
-            <IonFabButton className="btn__home btn__endTrip" color="danger" onClick={cancelTrip}>
-              <IonIcon icon={squareOutline}></IonIcon>
-            </IonFabButton>
-          </>
-        )}
-
-        {/* LAST LANDMARK VISITED */}
-        {trip.isLastVisited && (
-          <IonAlert
-            isOpen={true}
-            header="Looks like you're done!"
-            message="The trip has ended."
-            buttons={[
-              {
-                text: 'Cancel',
-                role: 'cancel',
-              },
-              {
-                text: 'OK!',
-                role: 'confirm',
-                handler: () => cancelTrip(),
-              },
-            ]}
-          ></IonAlert>
-        )}
+            {/* LAST LANDMARK VISITED */}
+            {trip.isLastVisited && (
+              <IonAlert
+                isOpen={true}
+                header="Looks like you're done!"
+                message="The trip has ended."
+                buttons={[
+                  {
+                    text: 'Cancel',
+                    role: 'cancel',
+                  },
+                  {
+                    text: 'OK!',
+                    role: 'confirm',
+                    handler: () => cancelTrip(),
+                  },
+                ]}
+              ></IonAlert>
+            )}
           </>
         )}
       </IonContent>
