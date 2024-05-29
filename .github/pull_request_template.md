@@ -4,9 +4,6 @@ Here give examples of the changes you've made in this pull request. Include an i
 ### ✨ What's the context?
 What's the context for the changes? Are there any
 
-### 🧠 Rationale behind the change
-Why did you choose to make these changes? Were there any trade-offs you had to consider? 
-
 ### 🧪 Testing
 How do you know the changes are safe to merge to main?
 
@@ -19,3 +16,6 @@ If you made UI changes, what are the before and afters?
 
 ### 🐛 Linked issues
 Write down all related issues to the pull request here. Use the closing syntax when an issue is deemed as resolved.
+
+Example:
+- Closes #[number]
