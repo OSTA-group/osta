@@ -1,34 +1,34 @@
 import {
   IonButton, IonItem, IonLabel, IonReorder, IonReorderGroup, ItemReorderEventDetail
-} from '@ionic/react';
-import {useTrip} from '../../hooks/useTrip';
-import {LoadingIndicator} from '../../components/LoadingIndicator';
-import {WarningPopup} from '../../components/WarningPopup';
-import React from 'react';
-import {Landmark} from '../../types';
-import {AppScreen} from '../../components/AppScreen';
-import LocationService from '../../services/LocationService';
-import LocationHelper from '../../helpers/LocationHelper';
+} from '@ionic/react'
+import {useTrip} from '../../hooks/useTrip'
+import {LoadingIndicator} from '../../components/LoadingIndicator'
+import {WarningPopup} from '../../components/WarningPopup'
+import React from 'react'
+import {Landmark} from '../../types'
+import {AppScreen} from '../../components/AppScreen'
+import LocationService from '../../services/LocationService'
+import LocationHelper from '../../helpers/LocationHelper'
 
-const pageName = 'Create route';
+const pageName = 'Create route'
 
 export function OrganiseTripScreen() {
   const {
     trip, isGettingTrip, isErrorGettingTrip, isErrorChangingTrip, changeTripOrder, startTrip
-  } = useTrip();
+  } = useTrip()
 
-  const isErrorInTrip = isErrorGettingTrip || isErrorChangingTrip || !trip;
+  const isErrorInTrip = isErrorGettingTrip || isErrorChangingTrip || !trip
 
   const reorderTrip = (event: CustomEvent<ItemReorderEventDetail>) => {
     changeTripOrder({
       landmarkIndex1: event.detail.from,
       landmarkIndex2: event.detail.to,
-    });
-    event.detail.complete();
-  };
+    })
+    event.detail.complete()
+  }
 
   function saveTrip() {
-    startTrip();
+    startTrip()
   }
 
   if (isGettingTrip) {
@@ -36,22 +36,22 @@ export function OrganiseTripScreen() {
       <AppScreen name={pageName}>
         <LoadingIndicator text="Loading..."/>
       </AppScreen>
-    );
+    )
   }
 
   if (isErrorInTrip) {
-    return <WarningPopup title="Warning" message="Something went wrong while getting the landmarks." isOpen={true}/>;
+    return <WarningPopup title="Warning" message="Something went wrong while getting the landmarks." isOpen={true}/>
   }
 
-  const userLocation = LocationService.getUserLocation();
+  const userLocation = LocationService.getUserLocation()
 
   const landmarksWithDistances = trip.landmarks.map((landmark: Landmark, index: number) => {
-    const distanceFromUser = LocationHelper.calculateDistanceKm(userLocation, landmark.location);
+    const distanceFromUser = LocationHelper.calculateDistanceKm(userLocation, landmark.location)
     const distanceToNext = index < trip.landmarks.length - 1
       ? LocationHelper.calculateDistanceKm(landmark.location, trip.landmarks[index + 1].location)
-      : null;
-    return {...landmark, distanceFromUser, distanceToNext};
-  });
+      : null
+    return {...landmark, distanceFromUser, distanceToNext}
+  })
 
   return (
     <AppScreen name={pageName}>
@@ -71,11 +71,10 @@ export function OrganiseTripScreen() {
             <IonReorder slot="end"></IonReorder>
           </IonItem>
         ))}
-
       </IonReorderGroup>
       <IonButton routerLink={'/map'} onClick={saveTrip}>
         Confirm trip
       </IonButton>
     </AppScreen>
-  );
+  )
 }

@@ -12,9 +12,7 @@ function orderByDistanceFromUser(landmarks: Landmark[]): Landmark[] {
   const userLocation = LocationService.getUserLocation();
 
   return landmarks.map((landmark) => ({
-    // copy all other properties
     ...landmark,
-    // add distance
     distance: LocationHelper.calculateDistanceKm(landmark.location, userLocation),
   })).sort((landmark1, landmark2) => landmark1.distance - landmark2.distance);
 }
