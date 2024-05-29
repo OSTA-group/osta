@@ -1,11 +1,11 @@
-import {IonButton, IonCheckbox, IonItem, IonList, IonSearchbar, IonSelect, IonSelectOption, IonText} from '@ionic/react'
-import {Area} from '../../types'
+import { IonButton, IonCheckbox, IonItem, IonList, IonSearchbar, IonSelect, IonSelectOption, IonText } from '@ionic/react'
+import { Area } from '../../types'
 import React from 'react'
-import {useLandmarks} from '../../hooks/useLandmarks'
-import {WarningPopup} from '../../components/WarningPopup'
-import {useTrip} from '../../hooks/useTrip'
-import {AppScreen} from '../../components/AppScreen'
-import {useAreas} from '../../hooks/useAreas'
+import { useLandmarks } from '../../hooks/useLandmarks'
+import { WarningPopup } from '../../components/WarningPopup'
+import { useTrip } from '../../hooks/useTrip'
+import { AppScreen } from '../../components/AppScreen'
+import { useAreas } from '../../hooks/useAreas'
 import LandmarksHelper from '../../helpers/LandmarksHelper'
 
 const pageName = 'Create trip'
@@ -14,9 +14,9 @@ export function CreateTripScreen() {
   const [selectedCity, setSelectedCity] = React.useState<string>('')
   const [searchName, setSearchName] = React.useState<string>('')
 
-  const {trip, isGettingTrip, isErrorGettingTrip, changeTrip, isErrorChangingTrip} = useTrip()
-  const {landmarks, isGettingLandmarks, isErrorGettingLandmarks} = useLandmarks(selectedCity, searchName)
-  const {areas, isGettingAreas, isErrorGettingAreas} = useAreas()
+  const { trip, isGettingTrip, isErrorGettingTrip, changeTrip, isErrorChangingTrip } = useTrip()
+  const { landmarks, isGettingLandmarks, isErrorGettingLandmarks } = useLandmarks(selectedCity, searchName)
+  const { areas, isGettingAreas, isErrorGettingAreas } = useAreas()
 
   const displayLandmarks = LandmarksHelper.orderByDistanceFromUser(landmarks ?? [])
   const filterVisitedLandmarks = displayLandmarks.filter((landmark) => !landmark.visited)
@@ -28,7 +28,7 @@ export function CreateTripScreen() {
     if (landmarks) {
       const landmark = landmarks.find((landmark) => landmark.id === landmarkId)
       if (landmark) {
-        changeTrip({landmark, addToTrip: selected})
+        changeTrip({ landmark, addToTrip: selected })
       }
     }
   }
@@ -85,12 +85,11 @@ export function CreateTripScreen() {
             </IonItem>
           )}
 
-          {errorLoadingData && <WarningPopup title="Warning" message="Something went wrong." isOpen={true}/>}
+          {errorLoadingData && <WarningPopup title="Warning" message="Something went wrong." isOpen={true} />}
         </>
       </IonList>
 
-      <IonButton className="btn__home btn__download" routerLink="/trip/plan"
-                 disabled={trip && trip.landmarks.length === 0}>
+      <IonButton className="btn__home btn__download" routerLink="/trip/plan" disabled={trip && trip.landmarks.length === 0}>
         Plan route
       </IonButton>
     </AppScreen>
