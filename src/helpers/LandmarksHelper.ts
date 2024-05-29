@@ -1,4 +1,4 @@
-import { Landmark, Location } from '../types'
+import {Landmark, Location} from '../types'
 import LocationHelper from './LocationHelper'
 import LocationService from '../services/LocationService'
 
@@ -9,11 +9,14 @@ function getLandmarkId(location: Location): string {
 }
 
 function orderByDistanceFromUser(landmarks: Landmark[]): Landmark[] {
-  return landmarks.sort(
-    (landmark1, landmark2) =>
-      LocationHelper.calculateDistanceKm(landmark1.location, LocationService.getUserLocation()) -
-      LocationHelper.calculateDistanceKm(landmark2.location, LocationService.getUserLocation())
-  )
+  const userLocation = LocationService.getUserLocation();
+
+  return landmarks.map((landmark) => ({
+    // copy all other properties
+    ...landmark,
+    // add distance
+    distance: LocationHelper.calculateDistanceKm(landmark.location, userLocation),
+  })).sort((landmark1, landmark2) => landmark1.distance - landmark2.distance);
 }
 
-export default { getLandmarkId, orderByDistanceFromUser }
+export default {getLandmarkId, orderByDistanceFromUser}
