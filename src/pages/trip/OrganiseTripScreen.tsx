@@ -5,6 +5,8 @@ import { WarningPopup } from '../../components/WarningPopup'
 import React from 'react'
 import { Landmark } from '../../types'
 import { AppScreen } from '../../components/AppScreen'
+import LocationService from '../../services/LocationService'
+import LocationHelper from '../../helpers/LocationHelper'
 
 const pageName = 'Create route'
 
@@ -18,7 +20,6 @@ export function OrganiseTripScreen() {
       landmarkIndex1: event.detail.from,
       landmarkIndex2: event.detail.to,
     })
-
     event.detail.complete()
   }
 
@@ -38,13 +39,28 @@ export function OrganiseTripScreen() {
     return <WarningPopup title="Warning" message="Something went wrong while getting the landmarks." isOpen={true} />
   }
 
+  const userLocation = LocationService.getUserLocation()
+
+  const landmarksWithDistances = trip.landmarks.map((landmark: Landmark, index: number) => {
+    const distanceFromUser = LocationHelper.calculateDistanceKm(userLocation, landmark.location)
+    const distanceToNext =
+      index < trip.landmarks.length - 1 ? LocationHelper.calculateDistanceKm(landmark.location, trip.landmarks[index + 1].location) : null
+    return { ...landmark, distanceFromUser, distanceToNext }
+  })
+
   return (
     <AppScreen name={pageName}>
       <h1>Planning a new trip</h1>
       <IonReorderGroup disabled={false} onIonItemReorder={reorderTrip}>
-        {trip.landmarks.map((landmark: Landmark) => (
+        {landmarksWithDistances.map((landmark) => (
           <IonItem key={landmark.id}>
-            <IonLabel>{landmark.sources[0].name}</IonLabel>
+            <IonLabel>
+              <strong>{landmark.sources[0].name}</strong> <br />
+              <small>
+                Distance: {landmark.distanceFromUser.toFixed(2)} km
+                {landmark.distanceToNext !== null && <> | Next stop: {landmark.distanceToNext.toFixed(2)} km</>}
+              </small>
+            </IonLabel>
             <IonReorder slot="end"></IonReorder>
           </IonItem>
         ))}

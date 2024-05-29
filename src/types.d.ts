@@ -12,6 +12,7 @@
  * @property {SourceInformation[]} sources Information about the sources of the landmark.
  * @property {boolean} visited Indicates if the landmark has been visited.
  * @property {boolean} inTrip Indicates if the landmark is part of the current trip.
+ * @property {number} distance Indicates the distance from the user.
  */
 export type Landmark = {
   id: string
@@ -21,6 +22,7 @@ export type Landmark = {
   sources: SourceInformation[]
   visited: boolean
   inTrip: boolean
+  distance?: number
 }
 
 /**

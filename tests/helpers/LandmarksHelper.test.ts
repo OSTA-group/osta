@@ -42,9 +42,9 @@ describe('orderByDistanceFromUser', () => {
 
     // Expectation: landmarks should be sorted by distance from user location
     expect(sortedLandmarks).toEqual([
-      { id: '1', location: { lat: 40.7128, lng: -74.006 } },
-      { id: '3', location: { lat: 34.0522, lng: -118.2437 } },
-      { id: '2', location: { lat: 51.5074, lng: -0.1278 } },
+      { distance: 0, id: '1', location: { lat: 40.7128, lng: -74.006 } },
+      { distance: 3935.746254609722, id: '3', location: { lat: 34.0522, lng: -118.2437 } },
+      { distance: 5570.222179737958, id: '2', location: { lat: 51.5074, lng: -0.1278 } },
     ])
   })
 })

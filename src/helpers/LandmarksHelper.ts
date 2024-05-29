@@ -9,11 +9,14 @@ function getLandmarkId(location: Location): string {
 }
 
 function orderByDistanceFromUser(landmarks: Landmark[]): Landmark[] {
-  return landmarks.sort(
-    (landmark1, landmark2) =>
-      LocationHelper.calculateDistanceKm(landmark1.location, LocationService.getUserLocation()) -
-      LocationHelper.calculateDistanceKm(landmark2.location, LocationService.getUserLocation())
-  )
+  const userLocation = LocationService.getUserLocation()
+
+  return landmarks
+    .map((landmark) => ({
+      ...landmark,
+      distance: LocationHelper.calculateDistanceKm(landmark.location, userLocation),
+    }))
+    .sort((landmark1, landmark2) => landmark1.distance - landmark2.distance)
 }
 
 export default { getLandmarkId, orderByDistanceFromUser }

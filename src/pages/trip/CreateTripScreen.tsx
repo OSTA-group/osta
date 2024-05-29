@@ -74,7 +74,7 @@ export function CreateTripScreen() {
                   checkLandmark(e.target.value, e.target.checked)
                 }}
               >
-                {landmark.sources[0].name}
+                {landmark.sources[0].name} - {landmark.distance?.toFixed(2)} km
               </IonCheckbox>
             </IonItem>
           ))}
