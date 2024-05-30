@@ -38,9 +38,7 @@ export function MapScreen() {
   if (locationNotEnabled) {
     return (
       <IonPage>
-        <IonContent className="ion-padding">
           <LoadingIndicator text="Loading map..." />
-        </IonContent>
       </IonPage>
     )
   }
