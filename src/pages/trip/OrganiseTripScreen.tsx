@@ -95,7 +95,7 @@ export function OrganiseTripScreen() {
           </IonItemSliding>
         ))}
       </IonReorderGroup>
-      <IonButton routerLink={'/map'} onClick={saveTrip}>
+      <IonButton className="btn__home btn__download btn__color" routerLink={'/map'} onClick={saveTrip}>
         Confirm trip
       </IonButton>
 
