@@ -41,7 +41,7 @@ export function OrganiseTripScreen() {
 
   const removeLandmarkFromTrip = (landmarkId: string) => {
     if (trip && trip.landmarks.length > 1) {
-      const landmark = trip?.landmarks.find((landmark) => landmark.id === landmarkId)
+      const landmark = trip.landmarks.find((landmark) => landmark.id === landmarkId)
       if (landmark) {
         changeTrip({ landmark, addToTrip: false })
       }
