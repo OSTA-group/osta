@@ -1,8 +1,20 @@
-import { IonButton, IonItem, IonLabel, IonReorder, IonReorderGroup, ItemReorderEventDetail } from '@ionic/react'
+import {
+  IonAlert,
+  IonButton,
+  IonItem,
+  IonItemOption,
+  IonItemOptions,
+  IonItemSliding,
+  IonLabel,
+  IonReorder,
+  IonReorderGroup,
+  IonText,
+  ItemReorderEventDetail,
+} from '@ionic/react'
 import { useTrip } from '../../hooks/useTrip'
 import { LoadingIndicator } from '../../components/LoadingIndicator'
 import { WarningPopup } from '../../components/WarningPopup'
-import React from 'react'
+import React, { useState } from 'react'
 import { Landmark } from '../../types'
 import { AppScreen } from '../../components/AppScreen'
 import LocationService from '../../services/LocationService'
@@ -11,8 +23,8 @@ import LocationHelper from '../../helpers/LocationHelper'
 const pageName = 'Create route'
 
 export function OrganiseTripScreen() {
-  const { trip, isGettingTrip, isErrorGettingTrip, isErrorChangingTrip, changeTripOrder, startTrip } = useTrip()
-
+  const [showDeletingNotPossibleAlert, setShowDeletingNotPossibleAlert] = useState(false)
+  const { trip, isGettingTrip, isErrorGettingTrip, isErrorChangingTrip, changeTripOrder, startTrip, changeTrip } = useTrip()
   const isErrorInTrip = isErrorGettingTrip || isErrorChangingTrip || !trip
 
   const reorderTrip = (event: CustomEvent<ItemReorderEventDetail>) => {
@@ -23,8 +35,15 @@ export function OrganiseTripScreen() {
     event.detail.complete()
   }
 
-  function saveTrip() {
-    startTrip()
+  const removeLandmarkFromTrip = (landmarkId: string) => {
+    if (trip && trip.landmarks.length > 1) {
+      const landmark = trip.landmarks.find((landmark) => landmark.id === landmarkId)
+      if (landmark) {
+        changeTrip({ landmark, addToTrip: false })
+      }
+    } else {
+      setShowDeletingNotPossibleAlert(true)
+    }
   }
 
   if (isGettingTrip) {
@@ -53,21 +72,37 @@ export function OrganiseTripScreen() {
       <h1>Planning a new trip</h1>
       <IonReorderGroup disabled={false} onIonItemReorder={reorderTrip}>
         {landmarksWithDistances.map((landmark) => (
-          <IonItem key={landmark.id}>
-            <IonLabel>
-              <strong>{landmark.sources[0].name}</strong> <br />
-              <small>
-                Distance: {landmark.distanceFromUser.toFixed(2)} km
-                {landmark.distanceToNext !== null && <> | Next stop: {landmark.distanceToNext.toFixed(2)} km</>}
-              </small>
-            </IonLabel>
-            <IonReorder slot="end"></IonReorder>
-          </IonItem>
+          <IonItemSliding key={landmark.id}>
+            <IonItem>
+              <IonLabel>
+                <strong>{landmark.sources[0].name}</strong> <br />
+                <small>
+                  Distance: {landmark.distanceFromUser.toFixed(2)} km
+                  {landmark.distanceToNext !== null && <> | Next stop: {landmark.distanceToNext.toFixed(2)} km</>}
+                </small>
+              </IonLabel>
+              <IonReorder slot="end"></IonReorder>
+            </IonItem>
+            <IonItemOptions side="end">
+              <IonItemOption color="danger" onClick={() => removeLandmarkFromTrip(landmark.id)}>
+                <IonText>Delete</IonText>
+              </IonItemOption>
+            </IonItemOptions>
+          </IonItemSliding>
         ))}
       </IonReorderGroup>
-      <IonButton routerLink={'/map'} onClick={saveTrip}>
+      <IonButton className="btn__home btn__download btn__color" routerLink={'/map'} onClick={() => startTrip()}>
         Confirm trip
       </IonButton>
+
+      {/* Alert component */}
+      <IonAlert
+        isOpen={showDeletingNotPossibleAlert}
+        onDidDismiss={() => setShowDeletingNotPossibleAlert(false)}
+        header="Can't do that right now."
+        message="Where would you be going without a landmark?"
+        buttons={['OK']}
+      />
     </AppScreen>
   )
 }

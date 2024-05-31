@@ -89,7 +89,7 @@ export function CreateTripScreen() {
         </>
       </IonList>
 
-      <IonButton className="btn__home btn__download" routerLink="/trip/plan" disabled={trip && trip.landmarks.length === 0}>
+      <IonButton className="btn__home btn__download btn__color" routerLink="/trip/plan" disabled={trip && trip.landmarks.length === 0}>
         Plan route
       </IonButton>
     </AppScreen>
