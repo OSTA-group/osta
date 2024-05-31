@@ -1,5 +1,4 @@
 import {
-  IonAlert,
   IonButton,
   IonItem,
   IonItemOption,
@@ -98,15 +97,7 @@ export function OrganiseTripScreen() {
       <IonButton className="btn__home btn__download btn__color" routerLink={'/map'} onClick={saveTrip}>
         Confirm trip
       </IonButton>
-
-      {/* Alert component */}
-      <IonAlert
-        isOpen={showAlert}
-        onDidDismiss={() => setShowAlert(false)}
-        header="Can't do that right now."
-        message="Where would you be going without a landmark?"
-        buttons={['OK']}
-      />
+      <WarningPopup title="Can't do that right now." message="Where would you be going without a landmark?" isOpen={showAlert} />
     </AppScreen>
   )
 }
