@@ -35,10 +35,6 @@ export function OrganiseTripScreen() {
     event.detail.complete()
   }
 
-  function saveTrip() {
-    startTrip()
-  }
-
   const removeLandmarkFromTrip = (landmarkId: string) => {
     if (trip && trip.landmarks.length > 1) {
       const landmark = trip.landmarks.find((landmark) => landmark.id === landmarkId)
@@ -95,7 +91,7 @@ export function OrganiseTripScreen() {
           </IonItemSliding>
         ))}
       </IonReorderGroup>
-      <IonButton className="btn__home btn__download btn__color" routerLink={'/map'} onClick={saveTrip}>
+      <IonButton className="btn__home btn__download btn__color" routerLink={'/map'} onClick={() => startTrip()}>
         Confirm trip
       </IonButton>
 
