@@ -23,7 +23,7 @@ import LocationHelper from '../../helpers/LocationHelper'
 const pageName = 'Create route'
 
 export function OrganiseTripScreen() {
-  const [showAlert, setShowAlert] = useState(false)
+  const [showDeletingNotPossibleAlert, setShowDeletingNotPossibleAlert] = useState(false)
   const { trip, isGettingTrip, isErrorGettingTrip, isErrorChangingTrip, changeTripOrder, startTrip, changeTrip } = useTrip()
   const isErrorInTrip = isErrorGettingTrip || isErrorChangingTrip || !trip
 
@@ -39,14 +39,14 @@ export function OrganiseTripScreen() {
     startTrip()
   }
 
-  const removeLandmarkFromTrip = (landmarkId: string, add: boolean) => {
+  const removeLandmarkFromTrip = (landmarkId: string) => {
     if (trip && trip.landmarks.length > 1) {
       const landmark = trip?.landmarks.find((landmark) => landmark.id === landmarkId)
       if (landmark) {
-        changeTrip({ landmark, addToTrip: add })
+        changeTrip({ landmark, addToTrip: false })
       }
     } else {
-      setShowAlert(true)
+      setShowDeletingNotPossibleAlert(true)
     }
   }
 
@@ -88,7 +88,7 @@ export function OrganiseTripScreen() {
               <IonReorder slot="end"></IonReorder>
             </IonItem>
             <IonItemOptions side="end">
-              <IonItemOption color="danger" onClick={() => removeLandmarkFromTrip(landmark.id, false)}>
+              <IonItemOption color="danger" onClick={() => removeLandmarkFromTrip(landmark.id)}>
                 <IonText>Delete</IonText>
               </IonItemOption>
             </IonItemOptions>
@@ -101,8 +101,8 @@ export function OrganiseTripScreen() {
 
       {/* Alert component */}
       <IonAlert
-        isOpen={showAlert}
-        onDidDismiss={() => setShowAlert(false)}
+        isOpen={showDeletingNotPossibleAlert}
+        onDidDismiss={() => setShowDeletingNotPossibleAlert(false)}
         header="Can't do that right now."
         message="Where would you be going without a landmark?"
         buttons={['OK']}
