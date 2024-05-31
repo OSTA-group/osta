@@ -27,19 +27,28 @@ Before running the following make sure the connected device is also in debug mod
 npm run android
 ```
 
-## Adding new features
-Before you start coding, follow these steps:
+## Submitting Issues
+Before submitting an issue, double-check that it is not a duplicate.
 
-### 1. Fork the project:
-  - To begin working on the OSTA project, you’ll need the source code. Fork the main repository to create your own copy.
-  - Click the “Fork” button on the top right of the repository page.
+For big feature requests, we recommend first opening a discussion on the [discussions page](https://github.com/BauwenDR/osta/discussions/categories/ideas).
 
-### 2. Make your changes
-  - Implement the new feature or fix the issue in your branch.
-  - Commit your changes with clear and concise messages.
+## Submitting Issues and Adding New Features
 
-### 3. Pull request
-  - Follow the [checklist](https://github.com/BauwenDR/osta/blob/main/.github/pull_request_template.md) to make sure that you're 100% done.
-  - Once your changes are ready, open a pull request (PR) to merge your branch into to main repository
+### 1. Check Discussions/Issues
+- **Review Discussions:** Check the discussions page to see if the feature has already been sugested (or possibly rejected).
+- **Start a Discussion for Major Features:** For major features, start a discussion to gather feedback and suggestions. This ensures that any changes to the workflow are considered.
+- **Analyze Thoroughly:** Once the feature is thoroughly analyzed, new issue(s) will be created, and you can begin working on the issue.
+
+### 2. Fork the Project
+- **Fork the Repository:** Fork the main repository to create your own copy. Click the “Fork” button on the top right of the repository page.
+
+### 3. Make Your Changes
+- **Implement Changes:** Work on the new feature or fix the issue in your branch.
+- **Commit Your Changes:** Commit your changes with clear and concise messages.
+
+### 4. Pull Request
+- **Follow the Checklist:** Ensure you follow the [checklist](https://github.com/BauwenDR/osta/blob/main/.github/pull_request_template.md) to confirm you are 100% done.
+- **Open a Pull Request (PR):** Once your changes are ready, open a PR to merge your branch into the main repository.
+
 
 Happy coding! 🚀
