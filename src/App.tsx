@@ -47,6 +47,7 @@ import axios from 'axios'
 import { MarketplaceScreen } from './pages/MarketplaceScreen'
 import { ExtensionPropertiesScreen } from './pages/settings/ExtensionPropertiesScreen'
 import { Trip } from './types'
+import { MapProvider } from './contexts/MapContext'
 
 setupIonicReact()
 
@@ -56,7 +57,12 @@ export default function App() {
     const setupStore = async () => {
       IonicStorage.createStore('OstaDB')
 
-      await IonicStorage.get('trip').catch(async () => await IonicStorage.set('trip', {landmarks: [], started: false, nextLandmarkId: -1, isLastVisited: false} as Trip))
+      await IonicStorage.get('trip').catch(async () => await IonicStorage.set('trip', {
+        landmarks: [],
+        started: false,
+        nextLandmarkId: -1,
+        isLastVisited: false,
+      } as Trip))
     }
 
     setupStore()
@@ -104,22 +110,24 @@ export default function App() {
 
   return (
     <IonApp>
-      <QueryClientProvider client={queryClient}>
-        <IonReactRouter>
-          <IonRouterOutlet>
-            <Route path={'/settings/areas'} component={AreasSettingsScreen} />
-            <Route path={'/settings/extensions'} component={ExtensionsSettingsScreen} />
-            <Route path={'/marketplace'} component={MarketplaceScreen} />
-            <Route path={'/extensions/:extensionName'} component={ExtensionPropertiesScreen} />
-            <Route path={'/landmark/:landmarkId'} component={LandmarkDetailScreen} />
-            <Route path={'/trip/create'} component={CreateTripScreen} />
-            <Route path={'/trip/plan'} component={OrganiseTripScreen} />
-            <Route path={'/map'} component={MapScreen} />
-            <Route path={'/download'} component={DownloadScreen} />
-            <Redirect exact from="/" to="/map" />
-          </IonRouterOutlet>
-        </IonReactRouter>
-      </QueryClientProvider>
+      <MapProvider>
+        <QueryClientProvider client={queryClient}>
+          <IonReactRouter>
+            <IonRouterOutlet>
+              <Route path={'/settings/areas'} component={AreasSettingsScreen} />
+              <Route path={'/settings/extensions'} component={ExtensionsSettingsScreen} />
+              <Route path={'/marketplace'} component={MarketplaceScreen} />
+              <Route path={'/extensions/:extensionName'} component={ExtensionPropertiesScreen} />
+              <Route path={'/landmark/:landmarkId'} component={LandmarkDetailScreen} />
+              <Route path={'/trip/create'} component={CreateTripScreen} />
+              <Route path={'/trip/plan'} component={OrganiseTripScreen} />
+              <Route path={'/map'} component={MapScreen} />
+              <Route path={'/download'} component={DownloadScreen} />
+              <Redirect exact from="/" to="/map" />
+            </IonRouterOutlet>
+          </IonReactRouter>
+        </QueryClientProvider>
+      </MapProvider>
     </IonApp>
   )
 }
