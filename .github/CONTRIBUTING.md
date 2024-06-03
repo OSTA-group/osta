@@ -6,7 +6,7 @@ Anyone is welcome to open [issues](https://github.com/BauwenDR/osta/issues) and/
 In order to build the app make sure you have the following installed:
 - NodeJS + NPM
 - Java 17 (Android does not support JDK 21 yet)
-- Gradle (or an IDE with build in gradle tools)
+- Gradle (or an IDE with built-in gradle tools)
 
 ### Installing
 In case the Ionic framework has not been installed, install this first
