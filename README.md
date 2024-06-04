@@ -32,7 +32,7 @@ You can find the technical documentation [here](https://github.com/BauwenDR/osta
 ## OSTA Projects
 - [OSTA Extensions](https://github.com/OSTA-group/osta-extensions)
 - [OSTA Marketplace](https://github.com/OSTA-group/osta-marketplace)
-- [OSTA Wikipedia Extension](https://github.com/OSTA-group/osta-wikipedia-extension)
+- [OSTA Wikipedia Extension](https://github.com/BauwenDR/osta-wikipedia-extension)
 
 ## Contributing
 See [contributing](https://github.com/BauwenDR/osta/blob/main/.github/CONTRIBUTING.md).
