@@ -30,8 +30,8 @@ Imagine that you are going to London for a week, exciting! You want to explore t
 You can find the technical documentation [here](https://github.com/BauwenDR/osta/blob/main/.github/OSTA-Technical-Documentation.pdf).
 
 ## OSTA Projects
-- [OSTA Extensions](https://github.com/BauwenDR/osta-extensions)
-- [OSTA Marketplace](https://github.com/BauwenDR/osta-marketplace)
+- [OSTA Extensions](https://github.com/OSTA-group/osta-extensions)
+- [OSTA Marketplace](https://github.com/OSTA-group/osta-marketplace)
 - [OSTA Wikipedia Extension](https://github.com/BauwenDR/osta-wikipedia-extension)
 
 ## Contributing
