@@ -72,7 +72,7 @@ export function AreasSettingsScreen() {
         )}
       </IonList>
       <IonButton className={'btn__color'} routerLink={'/download'}>
-        Add a new area
+        Download new area
       </IonButton>
 
       <IonAlert
