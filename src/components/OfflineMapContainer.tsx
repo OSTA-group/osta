@@ -17,9 +17,10 @@ interface OfflineMapContainerProperties {
   scrollWheelZoom: boolean
   children?: React.ReactNode
   className?: string
+  showLayout: boolean
 }
 
-export function OfflineMapContainer({ center, zoom, scrollWheelZoom, children, className }: OfflineMapContainerProperties) {
+export function OfflineMapContainer({ center, zoom, scrollWheelZoom, children, className, showLayout }: OfflineMapContainerProperties) {
   const map = useMap()
 
   useEffect(() => {
@@ -54,9 +55,11 @@ export function OfflineMapContainer({ center, zoom, scrollWheelZoom, children, c
       >
         {children}
       </MapContainer>
-      <IonFabButton color="light" onClick={handleCenterClick} className="btn__home btn__center">
-        <IonIcon icon={navigateOutline}></IonIcon>
-      </IonFabButton>
+      {showLayout && (
+        <IonFabButton color="light" onClick={handleCenterClick} className="btn__home btn__center">
+          <IonIcon icon={navigateOutline}></IonIcon>
+        </IonFabButton>
+      )}
     </>
   )
 }
