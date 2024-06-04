@@ -12,7 +12,7 @@ export function GeoSearchField() {
     provider: provider,
     style: 'bar',
     autoComplete: true,
-    autoCompleteDelay: 250,
+    autoCompleteDelay: 1000,
     animateZoom: true,
     notFoundMessage: 'Sorry, that address could not be found.',
     showMarker: false,
