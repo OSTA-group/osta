@@ -29,7 +29,10 @@ export function DownloadScreen() {
     if (areaName && map && map.current) {
       downloadNewLandmarks({
         areaName: areaName,
-        boundingBox: { topLeft: map.current.getBounds().getNorthWest(), bottomRight: map.current.getBounds().getSouthEast() },
+        boundingBox: {
+          topLeft: map.current.getBounds().getNorthWest(),
+          bottomRight: map.current.getBounds().getSouthEast(),
+        },
       })
       setIsModalOpen(false)
       setAreaName('')
