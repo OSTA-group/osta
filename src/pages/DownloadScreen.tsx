@@ -12,7 +12,7 @@ import { useMap } from '../contexts/MapContext'
 
 import '../components/css/DownloadScreen.css'
 
-const pageName = 'Download landmarks'
+const pageName = 'Download area'
 
 export function DownloadScreen() {
   const currentPosition = useLocation()
