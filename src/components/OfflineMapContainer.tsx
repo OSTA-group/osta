@@ -1,15 +1,15 @@
 import L from 'leaflet'
 import React, { useEffect } from 'react'
-import { MapContainer } from 'react-leaflet'
+import { MapContainer, TileLayer } from 'react-leaflet'
 import 'leaflet.offline'
 import { Location } from '../types'
 import { IonFabButton, IonIcon } from '@ionic/react'
 import { navigateOutline } from 'ionicons/icons'
+import { useMap } from '../contexts/MapContext'
 
 import 'leaflet/dist/leaflet.css'
 import './css/LeafletMap.css'
 import 'leaflet-draw/dist/leaflet.draw.css'
-import { useMap } from '../contexts/MapContext'
 
 interface OfflineMapContainerProperties {
   center: Location
@@ -52,7 +52,10 @@ export function OfflineMapContainer({ center, zoom, scrollWheelZoom, children, c
         className={className}
         worldCopyJump={true}
       >
-        {children}
+        <>
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          {children}
+        </>
       </MapContainer>
       <IonFabButton color="light" onClick={handleCenterClick} className="btn__home btn__center">
         <IonIcon icon={navigateOutline}></IonIcon>

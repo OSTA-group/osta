@@ -1,6 +1,6 @@
 import { IonAlert, IonContent, IonFab, IonFabButton, IonFabList, IonIcon, IonPage } from '@ionic/react'
 import React from 'react'
-import { Marker, Popup, TileLayer } from 'react-leaflet'
+import { Marker, Popup } from 'react-leaflet'
 import { useLandmarks } from '../hooks/useLandmarks'
 import { Landmark } from '../types'
 import { LoadingIndicator } from '../components/LoadingIndicator'
@@ -38,7 +38,7 @@ export function MapScreen() {
   if (locationNotEnabled) {
     return (
       <IonPage>
-          <LoadingIndicator text="Loading map..." />
+        <LoadingIndicator text="Loading map..." />
       </IonPage>
     )
   }
@@ -48,7 +48,6 @@ export function MapScreen() {
       <IonContent>
         {isGettingLandmarks || (isGettingTrip && <LoadingIndicator text="Loading landmarks..." />)}
         <OfflineMapContainer center={currentPosition} zoom={18} className="leaflet-container" scrollWheelZoom={true}>
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <Marker
             key={userDirection}
             position={[currentPosition.lat, currentPosition.lng]}
