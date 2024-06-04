@@ -172,7 +172,7 @@ export function MapScreen() {
                 <IonContent>
                   <div className={'modal__body'}>
                     <IonCardTitle className="modal__title">You explored {trip.landmarks[0].area}</IonCardTitle>
-                    <IonCardSubtitle className="modal__subtitle">Visited {trip.landmarks.length} Landmarks!</IonCardSubtitle>
+                    <IonCardSubtitle className="modal__subtitle">Visited {trip.landmarks.length} Landmark(s)!</IonCardSubtitle>
                     <div className="modal__map-container">
                       <OfflineMapContainer
                         center={{ lat: trip.landmarks[0].location.lat, lng: trip.landmarks[0].location.lng }}
