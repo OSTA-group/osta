@@ -1,45 +1,35 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonModal, IonToolbar } from '@ionic/react'
+import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonModal, IonText, IonToolbar } from '@ionic/react'
 import { OfflineMapContainer } from '../components/OfflineMapContainer'
-import { Circle, Marker, Popup, Rectangle, TileLayer, FeatureGroup } from 'react-leaflet'
+import { Circle, Marker, Popup } from 'react-leaflet'
+import React, { useState } from 'react'
 import MarkerHelper from '../helpers/MarkerHelper'
-import React, { useEffect, useState } from 'react'
 import { useLocation } from '../hooks/useLocation'
-import { EditControl } from 'react-leaflet-draw'
-import L, { LatLngBounds } from 'leaflet'
 import { LoadingIndicator } from '../components/LoadingIndicator'
 import { AppScreen } from '../components/AppScreen'
 import { useLandmarks } from '../hooks/useLandmarks'
 import { WarningPopup } from '../components/WarningPopup'
+import { useMap } from '../contexts/MapContext'
 
-const pageName = 'Download landmarks'
+import '../components/css/DownloadScreen.css'
+
+const pageName = 'Download area'
 
 export function DownloadScreen() {
   const currentPosition = useLocation()
+  const map = useMap()
 
   const { downloadNewLandmarks, isDownloadSuccess, isErrorDownloadingLandmark, isDownloadingLandmark, sourceName } = useLandmarks('', '')
 
-  const [rectangleBounds, setRectangleBounds] = useState<LatLngBounds>()
   const [areaName, setAreaName] = useState<string>('')
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const locationNotEnabled = currentPosition.lat === 0 && currentPosition.lng === 0
-
-  useEffect(() => {
-    if (!rectangleBounds && currentPosition.lng !== 0 && currentPosition.lat !== 0) {
-      setRectangleBounds(
-        new L.LatLngBounds(
-          [currentPosition.lat - 0.005, currentPosition.lng - 0.005],
-          [currentPosition.lat + 0.005, currentPosition.lng + 0.005]
-        )
-      )
-    }
-  }, [currentPosition])
+  const locationEnabled = !(currentPosition.lat === 0 && currentPosition.lng === 0)
 
   function handleDownload() {
-    if (rectangleBounds && areaName) {
+    if (areaName && map && map.current) {
       downloadNewLandmarks({
         areaName: areaName,
-        boundingBox: { topLeft: rectangleBounds.getNorthWest(), bottomRight: rectangleBounds.getSouthEast() },
+        boundingBox: { topLeft: map.current.getBounds().getNorthWest(), bottomRight: map.current.getBounds().getSouthEast() },
       })
       setIsModalOpen(false)
       setAreaName('')
@@ -50,15 +40,9 @@ export function DownloadScreen() {
     setIsModalOpen(!isModalOpen)
   }
 
-  function handleRectangleChange(bounds: LatLngBounds) {
-    if (bounds) {
-      setRectangleBounds(bounds)
-    }
-  }
-
-  if (locationNotEnabled) {
+  if (!locationEnabled) {
     return (
-      <AppScreen name={pageName}>
+      <AppScreen name={pageName} contentPadding={false}>
         <LoadingIndicator text="Loading map..." />
       </AppScreen>
     )
@@ -66,46 +50,19 @@ export function DownloadScreen() {
 
   return (
     <AppScreen name={pageName} contentPadding={false}>
-      {!locationNotEnabled && (
-        <OfflineMapContainer center={currentPosition} zoom={16} className="leaflet-container" scrollWheelZoom={true} showLayout={true}>
-          {/* Display the selected rectangle */}
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          <Circle center={currentPosition} radius={20} color="blue">
-            <Marker position={[currentPosition.lat, currentPosition.lng]} icon={MarkerHelper.getPersonMarker()}>
-              <Popup>You are here</Popup>
-            </Marker>
-          </Circle>
-
-          {/* EditControl for drawing and editing rectangles */}
-          <FeatureGroup>
-            <EditControl
-              position="topright"
-              draw={{
-                rectangle: false,
-                circle: false,
-                circlemarker: false,
-                marker: false,
-                polyline: false,
-                polygon: false,
-              }}
-              edit={{
-                rectangle: false,
-                circle: false,
-                circlemarker: false,
-                marker: false,
-                polyline: false,
-                polygon: false,
-              }}
-              onEditResize={(e) => handleRectangleChange(e.layer.getBounds())}
-              onEditMove={(e) => handleRectangleChange(e.layer.getBounds())}
-            />
-          </FeatureGroup>
-
-          {rectangleBounds && (
-            // @ts-expect-error - type not recognised by ts
-            <Rectangle bounds={rectangleBounds} pathOptions={{ color: 'blue', weight: 2 }} editable={true} onEdit={handleRectangleChange} />
-          )}
-        </OfflineMapContainer>
+      {locationEnabled && (
+        <>
+          <div className="download-screen">
+            <IonText>What is your next destination?</IonText>
+          </div>
+          <OfflineMapContainer center={currentPosition} zoom={16} className="leaflet-container" scrollWheelZoom={true}>
+            <Circle center={currentPosition} radius={20} color="blue">
+              <Marker position={[currentPosition.lat, currentPosition.lng]} icon={MarkerHelper.getPersonMarker()}>
+                <Popup>You are here</Popup>
+              </Marker>
+            </Circle>
+          </OfflineMapContainer>
+        </>
       )}
 
       <IonButton className="btn__home btn__download btn__color" onClick={toggleModal}>
