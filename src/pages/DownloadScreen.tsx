@@ -67,7 +67,7 @@ export function DownloadScreen() {
   return (
     <AppScreen name={pageName} contentPadding={false}>
       {!locationNotEnabled && (
-        <OfflineMapContainer center={currentPosition} zoom={16} className="leaflet-container" scrollWheelZoom={true}>
+        <OfflineMapContainer center={currentPosition} zoom={16} className="leaflet-container" scrollWheelZoom={true} showLayout={true}>
           {/* Display the selected rectangle */}
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <Circle center={currentPosition} radius={20} color="blue">

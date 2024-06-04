@@ -78,6 +78,10 @@
     margin-bottom: 20px;
 }
 
+.modal__buttons {
+    justify-content: center;
+}
+
 .modal__button {
     margin-bottom: 10px;
 }

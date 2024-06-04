@@ -9,6 +9,7 @@ import {
   IonIcon,
   IonModal,
   IonPage,
+  IonRow,
 } from '@ionic/react'
 import React from 'react'
 import { Marker, Popup, TileLayer } from 'react-leaflet'
@@ -170,7 +171,7 @@ export function MapScreen() {
             {trip.isLastVisited && mapDataLoaded && (
               <IonModal isOpen={true}>
                 <IonContent>
-                  <div className="modal__body">
+                  <div className={'modal__body'}>
                     <IonCardTitle className="modal__title">You explored {trip.landmarks[0].area}</IonCardTitle>
                     <IonCardSubtitle className="modal__subtitle">Visited {trip.landmarks.length} Landmarks!</IonCardSubtitle>
                     <div className="modal__map-container">
@@ -196,12 +197,11 @@ export function MapScreen() {
                         )}
                       </OfflineMapContainer>
                     </div>
-                    <IonButton color="danger" onClick={cancelTrip} expand="block">
-                      End Trip
-                    </IonButton>
-                    <IonButton expand="block" color="secondary">
-                      Share Results
-                    </IonButton>
+                    <IonRow className={'modal__buttons'}>
+                      <IonButton className={'modal__button'} color="danger" onClick={cancelTrip} expand="block">
+                        End Trip
+                      </IonButton>
+                    </IonRow>
                   </div>
                 </IonContent>
               </IonModal>
