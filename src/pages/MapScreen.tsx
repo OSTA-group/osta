@@ -50,7 +50,7 @@ export function MapScreen() {
   if (locationNotEnabled) {
     return (
       <IonPage>
-        <LoadingIndicator text="Loading map..." />
+          <LoadingIndicator text="Loading map..." />
       </IonPage>
     )
   }
