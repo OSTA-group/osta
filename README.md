@@ -81,7 +81,7 @@ Imagine that you are going to Los Angeles for a week, exciting! You want to expl
 6. Mark the landmark as seen and continue your trip till the end.
 
 ## Documentation
-You can find the technical documentation [here](https://github.com/BauwenDR/osta/blob/main/.github/OSTA-Technical-Documentation.pdf).
+You can find the technical documentation [here](https://github.com/OSTA-group/osta/wiki/TechnicalDocumentation).
 
 ## OSTA Projects
 Do you want to create your own extension?
