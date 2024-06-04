@@ -196,7 +196,7 @@ export function MapScreen() {
                       </OfflineMapContainer>
                     </div>
                     <IonRow className={'modal__buttons'}>
-                      <IonButton className={'modal__button'} color="danger" onClick={cancelTrip} expand="block">
+                      <IonButton className={'modal__button'} color="danger" onClick={cancelTrip}>
                         End Trip
                       </IonButton>
                     </IonRow>
