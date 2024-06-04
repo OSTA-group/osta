@@ -9,7 +9,6 @@ import { useMap } from '../contexts/MapContext'
 
 import 'leaflet/dist/leaflet.css'
 import './css/LeafletMap.css'
-import 'leaflet-draw/dist/leaflet.draw.css'
 
 interface OfflineMapContainerProperties {
   center: Location
