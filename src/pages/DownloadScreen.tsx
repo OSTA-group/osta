@@ -58,7 +58,7 @@ export function DownloadScreen() {
           <div className="download-screen">
             <IonText>What is your next destination?</IonText>
           </div>
-          <OfflineMapContainer center={currentPosition} zoom={16} className="leaflet-container" scrollWheelZoom={true} showLayout={true}>
+          <OfflineMapContainer center={currentPosition} zoom={18} className="leaflet-container" scrollWheelZoom={true} showLayout={true}>
             <Circle center={currentPosition} radius={20} color="blue">
               <Marker position={[currentPosition.lat, currentPosition.lng]} icon={MarkerHelper.getPersonMarker()}>
                 <Popup>You are here</Popup>
