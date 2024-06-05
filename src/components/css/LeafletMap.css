@@ -56,3 +56,11 @@
 .popup__text__center ion-text {
   margin-left: 1em;
 }
+
+/* override styling of leafletjs elements */
+
+.leaflet-control-zoom > a {
+  background-color: var(--ion-color-light, var(--ion-background-color, #fff)) !important;
+  color: var(--ion-color-dark) !important;
+  border-color: var(--ion-color-light-tint) !important;
+}
