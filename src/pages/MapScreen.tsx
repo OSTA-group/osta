@@ -34,14 +34,14 @@ export function MapScreen() {
 
   const currentPosition = useLocation()
   const userDirection = useCompassDirection()
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isTripResultModalOpen, setTripResultModal] = useState(false)
 
   const mapDataLoaded = !isGettingLandmarks && !isErrorGettingLandmarks && !isGettingTrip && !isErrorGettingTrip && landmarks && trip
   const errorLoadingData = isErrorGettingLandmarks || isErrorGettingTrip
   const locationNotEnabled = currentPosition.lat === 0 && currentPosition.lng === 0
 
-  const openModal = () => {
-    setIsModalOpen(true)
+  const openTripResultModal = () => {
+    setTripResultModal(true)
   }
 
   const handleEndTrip = () => {
@@ -165,7 +165,11 @@ export function MapScreen() {
                   />
                 )}
 
-                <IonFabButton className="btn__home btn__endTrip" color="danger" onClick={trip.isLastVisited ? openModal : handleEndTrip}>
+                <IonFabButton
+                  className="btn__home btn__endTrip"
+                  color="danger"
+                  onClick={trip.isLastVisited ? openTripResultModal : handleEndTrip}
+                >
                   <IonIcon icon={squareOutline}></IonIcon>
                 </IonFabButton>
               </>
@@ -173,7 +177,7 @@ export function MapScreen() {
 
             {/* LAST LANDMARK VISITED */}
             {trip.isLastVisited && mapDataLoaded && (
-              <IonModal isOpen={isModalOpen}>
+              <IonModal isOpen={isTripResultModalOpen}>
                 <IonContent>
                   <div className={'modal__body'}>
                     <IonCardTitle className="modal__title">You explored {trip.landmarks[0].area}</IonCardTitle>
