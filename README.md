@@ -1,5 +1,5 @@
 # Open Source Tourism App (OSTA)
-This mobile application can retrieve relevant landmark information from reliable sources, such as Wikipedia using extensions. Users can save this information offline and later create their own trips to explore the city. OSTA is an initiative from Belgium Karel De Grote Students in collaboration with Info Support. Our goal is to make travel information accessible for everyone, even without an internet connection. 
+This mobile application can retrieve relevant landmark information from reliable sources, such as Wikipedia using extensions. Users can save this information offline and later create their own trips to explore the city. OSTA is an initiative from Belgian Karel de Grote Students in collaboration with Info Support. Our goal is to make travel information accessible for everyone, even without an internet connection. 
 
 ## Installation
 
