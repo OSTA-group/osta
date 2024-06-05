@@ -59,7 +59,7 @@ export function MapScreen() {
     <IonPage>
       <IonContent>
         {isGettingLandmarks || (isGettingTrip && <LoadingIndicator text="Loading landmarks..." />)}
-        <OfflineMapContainer center={currentPosition} zoom={16} className="leaflet-container" scrollWheelZoom={true} showLayout={true}>
+        <OfflineMapContainer center={currentPosition} zoom={18} className="leaflet-container" scrollWheelZoom={true} showLayout={true}>
           <Marker
             key={userDirection}
             position={[currentPosition.lat, currentPosition.lng]}
