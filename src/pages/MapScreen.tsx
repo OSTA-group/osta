@@ -11,7 +11,7 @@ import {
   IonPage,
   IonRow,
 } from '@ionic/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { Marker, Popup } from 'react-leaflet'
 import { useLandmarks } from '../hooks/useLandmarks'
 import { Landmark } from '../types'
@@ -34,12 +34,17 @@ export function MapScreen() {
 
   const currentPosition = useLocation()
   const userDirection = useCompassDirection()
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const mapDataLoaded = !isGettingLandmarks && !isErrorGettingLandmarks && !isGettingTrip && !isErrorGettingTrip && landmarks && trip
   const errorLoadingData = isErrorGettingLandmarks || isErrorGettingTrip
   const locationNotEnabled = currentPosition.lat === 0 && currentPosition.lng === 0
 
-  const cancelTrip = () => {
+  const openModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const handleEndTrip = () => {
     endTrip()
   }
 
@@ -86,7 +91,7 @@ export function MapScreen() {
                 </MarkerClusterGroup>
               )}
 
-              {/* TRIP EXISTS*/}
+              {/* TRIP EXISTS */}
               {trip.started && (
                 <>
                   {/* SHOW MARKERS FOR LANDMARKS IN A TRIP */}
@@ -160,7 +165,7 @@ export function MapScreen() {
                   />
                 )}
 
-                <IonFabButton className="btn__home btn__endTrip" color="danger" onClick={cancelTrip}>
+                <IonFabButton className="btn__home btn__endTrip" color="danger" onClick={trip.isLastVisited ? openModal : handleEndTrip}>
                   <IonIcon icon={squareOutline}></IonIcon>
                 </IonFabButton>
               </>
@@ -168,7 +173,7 @@ export function MapScreen() {
 
             {/* LAST LANDMARK VISITED */}
             {trip.isLastVisited && mapDataLoaded && (
-              <IonModal isOpen={true}>
+              <IonModal isOpen={isModalOpen}>
                 <IonContent>
                   <div className={'modal__body'}>
                     <IonCardTitle className="modal__title">You explored {trip.landmarks[0].area}</IonCardTitle>
@@ -196,7 +201,7 @@ export function MapScreen() {
                       </OfflineMapContainer>
                     </div>
                     <IonRow className={'modal__buttons'}>
-                      <IonButton className={'modal__button'} color="danger" onClick={cancelTrip}>
+                      <IonButton className={'modal__button'} color="danger" onClick={handleEndTrip}>
                         End Trip
                       </IonButton>
                     </IonRow>
