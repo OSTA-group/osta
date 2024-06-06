@@ -9,9 +9,9 @@ import { AppScreen } from '../components/AppScreen'
 import { useLandmarks } from '../hooks/useLandmarks'
 import { WarningPopup } from '../components/WarningPopup'
 import { useMap } from '../contexts/MapContext'
+import { GeoSearchField } from '../components/GeoSearchField'
 
 import '../components/css/DownloadScreen.css'
-import { GeoSearchField } from '../components/GeoSearchField'
 
 const pageName = 'Download area'
 
@@ -28,13 +28,33 @@ export function DownloadScreen() {
 
   function handleDownload() {
     if (areaName && map && map.current) {
+      const bounds = map.current.getBounds()
+      const northWest = bounds.getNorthWest()
+      const southEast = bounds.getSouthEast()
+
+      const areaHeight = northWest.lat - southEast.lat
+      const areaWidth = northWest.lng - southEast.lng
+
+      const halfAdjustedHeight = (areaHeight * 0.65) / 2
+      const halfAdjustedWidth = (areaWidth * 0.75) / 2
+
+      const center = bounds.getCenter()
+
+      const newNorthWest = {
+        lat: center.lat + halfAdjustedHeight,
+        lng: center.lng + halfAdjustedWidth,
+      }
+
+      const newSouthEast = {
+        lat: center.lat - halfAdjustedHeight,
+        lng: center.lng - halfAdjustedWidth,
+      }
+
       downloadNewLandmarks({
         areaName: areaName,
-        boundingBox: {
-          topLeft: map.current.getBounds().getNorthWest(),
-          bottomRight: map.current.getBounds().getSouthEast(),
-        },
+        boundingBox: { topLeft: newNorthWest, bottomRight: newSouthEast },
       })
+
       setIsModalOpen(false)
       setAreaName('')
     }
