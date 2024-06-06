@@ -1,5 +1,17 @@
-import { IonAlert, IonContent, IonFab, IonFabButton, IonFabList, IonIcon, IonPage } from '@ionic/react'
-import React from 'react'
+import {
+  IonButton,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonContent,
+  IonFab,
+  IonFabButton,
+  IonFabList,
+  IonIcon,
+  IonModal,
+  IonPage,
+  IonRow,
+} from '@ionic/react'
+import React, { useState } from 'react'
 import { Marker, Popup } from 'react-leaflet'
 import { useLandmarks } from '../hooks/useLandmarks'
 import { Landmark } from '../types'
@@ -22,12 +34,17 @@ export function MapScreen() {
 
   const currentPosition = useLocation()
   const userDirection = useCompassDirection()
+  const [isTripResultModalOpen, setTripResultModalOpen] = useState(false)
 
   const mapDataLoaded = !isGettingLandmarks && !isErrorGettingLandmarks && !isGettingTrip && !isErrorGettingTrip && landmarks && trip
   const errorLoadingData = isErrorGettingLandmarks || isErrorGettingTrip
   const locationNotEnabled = currentPosition.lat === 0 && currentPosition.lng === 0
 
-  const cancelTrip = () => {
+  const openTripResultModal = () => {
+    setTripResultModalOpen(true)
+  }
+
+  const handleEndTrip = () => {
     endTrip()
   }
 
@@ -47,7 +64,7 @@ export function MapScreen() {
     <IonPage>
       <IonContent>
         {isGettingLandmarks || (isGettingTrip && <LoadingIndicator text="Loading landmarks..." />)}
-        <OfflineMapContainer center={currentPosition} zoom={18} className="leaflet-container" scrollWheelZoom={true}>
+        <OfflineMapContainer center={currentPosition} zoom={18} className="leaflet-container" scrollWheelZoom={true} showLayout={true}>
           <Marker
             key={userDirection}
             position={[currentPosition.lat, currentPosition.lng]}
@@ -68,12 +85,13 @@ export function MapScreen() {
                       landmark={landmark}
                       markerIcon={MarkerHelper.getUnvisitedMarker()}
                       markerIconVisited={MarkerHelper.getVisitedMarker()}
+                      showPopup={true}
                     />
                   ))}
                 </MarkerClusterGroup>
               )}
 
-              {/* TRIP EXISTS*/}
+              {/* TRIP EXISTS */}
               {trip.started && (
                 <>
                   {/* SHOW MARKERS FOR LANDMARKS IN A TRIP */}
@@ -85,6 +103,7 @@ export function MapScreen() {
                           landmark={landmark}
                           markerIcon={MarkerHelper.getUnvisitedInTripMarker()}
                           markerIconVisited={MarkerHelper.getVisitedInTripMarker()}
+                          showPopup={true}
                         />
                       )
                   )}
@@ -99,6 +118,7 @@ export function MapScreen() {
                             landmark={landmark}
                             markerIcon={MarkerHelper.getUnvisitedMarker()}
                             markerIconVisited={MarkerHelper.getVisitedMarker()}
+                            showPopup={true}
                           />
                         )
                     )}
@@ -145,30 +165,53 @@ export function MapScreen() {
                   />
                 )}
 
-                <IonFabButton className="btn__home btn__endTrip" color="danger" onClick={cancelTrip}>
+                <IonFabButton
+                  className="btn__home btn__endTrip"
+                  color="danger"
+                  onClick={trip.isLastVisited ? openTripResultModal : handleEndTrip}
+                >
                   <IonIcon icon={squareOutline}></IonIcon>
                 </IonFabButton>
               </>
             )}
 
             {/* LAST LANDMARK VISITED */}
-            {trip.isLastVisited && (
-              <IonAlert
-                isOpen={true}
-                header="Looks like you're done!"
-                message="The trip has ended."
-                buttons={[
-                  {
-                    text: 'Cancel',
-                    role: 'cancel',
-                  },
-                  {
-                    text: 'OK!',
-                    role: 'confirm',
-                    handler: () => cancelTrip(),
-                  },
-                ]}
-              />
+            {trip.isLastVisited && mapDataLoaded && (
+              <IonModal isOpen={isTripResultModalOpen}>
+                <IonContent>
+                  <div className={'modal__body'}>
+                    <IonCardTitle className="modal__title">You explored {trip.landmarks[0].area}</IonCardTitle>
+                    <IonCardSubtitle className="modal__subtitle">Visited {trip.landmarks.length} Landmark(s)!</IonCardSubtitle>
+                    <div className="modal__map-container">
+                      <OfflineMapContainer
+                        center={{ lat: trip.landmarks[0].location.lat, lng: trip.landmarks[0].location.lng }}
+                        zoom={14}
+                        className="leaflet-container"
+                        scrollWheelZoom={false}
+                        showLayout={false}
+                      >
+                        {landmarks.map(
+                          (landmark: Landmark) =>
+                            landmark.inTrip && (
+                              <LandmarkMarker
+                                key={landmark.id}
+                                landmark={landmark}
+                                markerIcon={MarkerHelper.getUnvisitedInTripMarker()}
+                                markerIconVisited={MarkerHelper.getVisitedInTripMarker()}
+                                showPopup={false}
+                              />
+                            )
+                        )}
+                      </OfflineMapContainer>
+                    </div>
+                    <IonRow className={'modal__buttons'}>
+                      <IonButton className={'modal__button'} color="danger" onClick={handleEndTrip}>
+                        End Trip
+                      </IonButton>
+                    </IonRow>
+                  </div>
+                </IonContent>
+              </IonModal>
             )}
           </>
         )}

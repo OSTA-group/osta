@@ -87,3 +87,34 @@
     --accent: var(--ion-color-light-shade);
   }
 }
+
+/* Modal */
+
+.modal__body {
+  padding: 20px;
+  text-align: center;
+}
+
+.modal__title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.modal__subtitle {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.modal__map-container {
+  height: 300px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.modal__buttons {
+  justify-content: center;
+}
+
+.modal__button {
+  margin-bottom: 10px;
+}
