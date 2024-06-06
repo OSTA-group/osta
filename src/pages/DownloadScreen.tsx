@@ -76,7 +76,7 @@ export function DownloadScreen() {
     <AppScreen name={pageName} contentPadding={false}>
       {locationEnabled && (
         <>
-          <OfflineMapContainer center={currentPosition} zoom={16} className="leaflet-container" scrollWheelZoom={true}>
+          <OfflineMapContainer center={currentPosition} zoom={16} className="leaflet-container" scrollWheelZoom={true} showLayout={true}>
             <div className="download-screen">
               <IonText>What is your next destination?</IonText>
             </div>
