@@ -34,14 +34,14 @@ export function MapScreen() {
 
   const currentPosition = useLocation()
   const userDirection = useCompassDirection()
-  const [isTripResultModalOpen, setTripResultModal] = useState(false)
+  const [isTripResultModalOpen, setTripResultModalOpen] = useState(false)
 
   const mapDataLoaded = !isGettingLandmarks && !isErrorGettingLandmarks && !isGettingTrip && !isErrorGettingTrip && landmarks && trip
   const errorLoadingData = isErrorGettingLandmarks || isErrorGettingTrip
   const locationNotEnabled = currentPosition.lat === 0 && currentPosition.lng === 0
 
   const openTripResultModal = () => {
-    setTripResultModal(true)
+    setTripResultModalOpen(true)
   }
 
   const handleEndTrip = () => {
