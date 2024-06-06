@@ -30,7 +30,10 @@ export function DownloadScreen() {
     if (areaName && map && map.current) {
       downloadNewLandmarks({
         areaName: areaName,
-        boundingBox: { topLeft: map.current.getBounds().getNorthWest(), bottomRight: map.current.getBounds().getSouthEast() },
+        boundingBox: {
+          topLeft: map.current.getBounds().getNorthWest(),
+          bottomRight: map.current.getBounds().getSouthEast(),
+        },
       })
       setIsModalOpen(false)
       setAreaName('')
@@ -53,7 +56,7 @@ export function DownloadScreen() {
     <AppScreen name={pageName} contentPadding={false}>
       {locationEnabled && (
         <>
-          <OfflineMapContainer center={currentPosition} zoom={16} className="leaflet-container" scrollWheelZoom={true}>
+          <OfflineMapContainer center={currentPosition} zoom={16} className="leaflet-container" scrollWheelZoom={true} showLayout={true}>
             <div className="download-screen">
               <IonText>What is your next destination?</IonText>
             </div>
