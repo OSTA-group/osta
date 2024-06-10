@@ -1,4 +1,5 @@
 import {
+  IonAlert,
   IonButton,
   IonCardSubtitle,
   IonCardTitle,
@@ -28,13 +29,17 @@ import { WarningPopup } from '../components/WarningPopup'
 import 'leaflet-rotatedmarker'
 import { useCompassDirection } from '../hooks/useCompassDirection'
 
+import '../components/css/MapScreen.css'
+
 export function MapScreen() {
   const { landmarks, isGettingLandmarks, isErrorGettingLandmarks } = useLandmarks('', '')
   const { trip, isGettingTrip, isErrorGettingTrip, endTrip } = useTrip()
 
   const currentPosition = useLocation()
   const userDirection = useCompassDirection()
+
   const [isTripResultModalOpen, setTripResultModalOpen] = useState(false)
+  const [isEndTripAlertOpen, setEndTripAlertOpen] = useState(false)
 
   const mapDataLoaded = !isGettingLandmarks && !isErrorGettingLandmarks && !isGettingTrip && !isErrorGettingTrip && landmarks && trip
   const errorLoadingData = isErrorGettingLandmarks || isErrorGettingTrip
@@ -44,8 +49,8 @@ export function MapScreen() {
     setTripResultModalOpen(true)
   }
 
-  const handleEndTrip = () => {
-    endTrip()
+  const openEndTripAlert = () => {
+    setEndTripAlertOpen(true)
   }
 
   if (errorLoadingData) {
@@ -168,12 +173,37 @@ export function MapScreen() {
                 <IonFabButton
                   className="btn__home btn__endTrip"
                   color="danger"
-                  onClick={trip.isLastVisited ? openTripResultModal : handleEndTrip}
+                  onClick={trip.isLastVisited ? openTripResultModal : openEndTripAlert}
                 >
                   <IonIcon icon={squareOutline}></IonIcon>
                 </IonFabButton>
               </>
             )}
+
+            {/* NOT LAST LANDMARK VISITED AND END TRIP ALERT OPEN */}
+            <IonAlert
+              isOpen={isEndTripAlertOpen}
+              onWillDismiss={() => setEndTripAlertOpen(false)}
+              className="end-tip-alert"
+              header="End trip?"
+              message="Are you sure you want to end tre trip?"
+              buttons={[
+                {
+                  text: 'Cancel',
+                  role: 'cancel',
+                  handler: () => setEndTripAlertOpen(false),
+                },
+                {
+                  text: 'End trip',
+                  role: 'confirm',
+                  cssClass: 'end-tip-alert__end-trip-button',
+                  handler: () => {
+                    endTrip()
+                    setEndTripAlertOpen(false)
+                  },
+                },
+              ]}
+            />
 
             {/* LAST LANDMARK VISITED */}
             {trip.isLastVisited && mapDataLoaded && (
@@ -205,7 +235,7 @@ export function MapScreen() {
                       </OfflineMapContainer>
                     </div>
                     <IonRow className={'modal__buttons'}>
-                      <IonButton className={'modal__button'} color="danger" onClick={handleEndTrip}>
+                      <IonButton className={'modal__button'} color="danger" onClick={() => endTrip()}>
                         End Trip
                       </IonButton>
                     </IonRow>
