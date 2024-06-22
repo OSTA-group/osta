@@ -55,6 +55,7 @@ export function OfflineMapContainer({ center, zoom, scrollWheelZoom, children, c
           {children}
         </>
       </MapContainer>
+
       {showLayout && (
         <IonFabButton color="light" onClick={handleCenterClick} className="btn__home btn__center">
           <IonIcon icon={navigateOutline}></IonIcon>

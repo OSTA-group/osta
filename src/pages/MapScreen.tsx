@@ -175,7 +175,7 @@ export function MapScreen() {
                   color="danger"
                   onClick={trip.isLastVisited ? openTripResultModal : openEndTripAlert}
                 >
-                  <IonIcon icon={squareOutline}></IonIcon>
+                  <IonIcon icon={squareOutline}/>
                 </IonFabButton>
               </>
             )}

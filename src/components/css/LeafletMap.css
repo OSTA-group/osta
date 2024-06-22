@@ -12,6 +12,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  color: white;
   border: none;
   cursor: pointer;
   z-index: 3;
