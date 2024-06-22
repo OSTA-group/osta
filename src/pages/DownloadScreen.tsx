@@ -1,6 +1,6 @@
 import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonModal, IonText, IonToolbar } from '@ionic/react'
 import { OfflineMapContainer } from '../components/OfflineMapContainer'
-import { Circle, Marker, Popup } from 'react-leaflet'
+import { Marker, Popup } from 'react-leaflet'
 import React, { useState } from 'react'
 import MarkerHelper from '../helpers/MarkerHelper'
 import { useLocation } from '../hooks/useLocation'
@@ -82,16 +82,14 @@ export function DownloadScreen() {
             </div>
             <GeoSearchField />
 
-            <Circle center={currentPosition} radius={20} color="blue">
-              <Marker position={[currentPosition.lat, currentPosition.lng]} icon={MarkerHelper.getPersonMarker()}>
-                <Popup>You are here</Popup>
-              </Marker>
-            </Circle>
+            <Marker position={[currentPosition.lat, currentPosition.lng]} icon={MarkerHelper.getPersonMarker()}>
+              <Popup>You are here</Popup>
+            </Marker>
           </OfflineMapContainer>
         </>
       )}
 
-      <IonButton className="btn__home btn__download btn__color" onClick={toggleModal}>
+      <IonButton className="btn__home btn__download" onClick={toggleModal}>
         Download area
       </IonButton>
 

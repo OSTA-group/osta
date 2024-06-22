@@ -19,7 +19,7 @@ export function LandmarkMarker({ landmark, markerIcon, markerIconVisited, showPo
         <Popup>
           <IonRow>
             <IonText className={'popup__text__center'}>
-              <IonButton className={'btn__color'} routerLink={`/landmark/${landmark.id}`}>
+              <IonButton routerLink={`/landmark/${landmark.id}`}>
                 <IonIcon icon={informationCircleOutline} />
               </IonButton>
               <IonText>{landmark.sources[0].name}</IonText>

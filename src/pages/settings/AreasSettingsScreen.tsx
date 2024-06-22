@@ -71,9 +71,7 @@ export function AreasSettingsScreen() {
           </IonItem>
         )}
       </IonList>
-      <IonButton className={'btn__color'} routerLink={'/download'}>
-        Download new area
-      </IonButton>
+      <IonButton routerLink={'/download'}>Download new area</IonButton>
 
       <IonAlert
         isOpen={showAlert}
