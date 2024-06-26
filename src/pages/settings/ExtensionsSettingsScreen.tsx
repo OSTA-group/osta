@@ -90,9 +90,7 @@ export function ExtensionsSettingsScreen() {
           },
         ]}
       />
-      <IonButton className={'btn__color'} routerLink={'/marketplace'}>
-        Install new extensions
-      </IonButton>
+      <IonButton routerLink={'/marketplace'}>Install new extensions</IonButton>
     </AppScreen>
   )
 }

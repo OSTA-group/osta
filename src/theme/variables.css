@@ -1,2 +1,8 @@
 /* For information on how to create your own theme, please see:
 http://ionicframework.com/docs/theming/ */
+
+:root {
+  --ion-color-primary: hsl(202, 58%, 49%);
+  --ion-color-primary-shade: hsl(202, 58%, 44%);
+  --ion-color-primary-tint: hsl(202, 58%, 55%);
+}

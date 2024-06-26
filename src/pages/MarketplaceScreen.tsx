@@ -24,7 +24,7 @@ export function MarketplaceScreen() {
     downloadNewExtension,
     isSuccessDownloadingExtension,
     isErrorDownloadingExtension,
-    errorDownloadingExtension
+    errorDownloadingExtension,
   } = useExtensions()
 
   const gettingExtensions = isGettingExtensions || isGettingInstalledExtensions
@@ -46,7 +46,7 @@ export function MarketplaceScreen() {
   }, [isSuccessDownloadingExtension, downloadingExtension])
 
   useEffect(() => {
-    if(isErrorDownloadingExtension) {
+    if (isErrorDownloadingExtension) {
       setDownloadingExtension(undefined)
     }
   }, [isErrorDownloadingExtension])
@@ -85,7 +85,7 @@ export function MarketplaceScreen() {
                 installedExtensions={installedExtensions}
                 isBeingInstalled={downloadingExtension?.id === extension.id}
                 downloadExtension={() => startExtensionDownload(extension)}
-                className="flex__right ion-button__download btn__color"
+                className="flex__right ion-button__download"
               />
             </IonItem>
           ))}
@@ -94,9 +94,7 @@ export function MarketplaceScreen() {
           <WarningPopup title="Warning" message="Something went wrong while getting the extensions." isOpen={true} />
         )}
 
-        {errorDownloadingExtension && (
-          <WarningPopup title="Failed to download" message={errorDownloadingExtension.message} isOpen={true} />
-        )}
+        {errorDownloadingExtension && <WarningPopup title="Failed to download" message={errorDownloadingExtension.message} isOpen={true} />}
       </IonList>
     </AppScreen>
   )

@@ -139,7 +139,7 @@ export function MapScreen() {
           <>
             {!trip.started && (
               <>
-                <IonFabButton className="btn__home btn__planTrip btn__color" routerLink={'/trip/create'}>
+                <IonFabButton className="btn__home btn__planTrip" routerLink={'/trip/create'}>
                   <IonIcon icon={mapOutline}></IonIcon>
                 </IonFabButton>
 
