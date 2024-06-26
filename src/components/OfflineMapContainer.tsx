@@ -25,9 +25,7 @@ export function OfflineMapContainer({ center, zoom, scrollWheelZoom, children, c
   useEffect(() => {
     if (map && map.current) {
       // @ts-expect-error: leaflet.offline is a js only library, thus js cannot find the function even though it exists
-      const tileOfflineLayer = L.tileLayer.offline('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
-      })
+      const tileOfflineLayer = L.tileLayer.offline('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
       tileOfflineLayer.addTo(map.current)
 
       map.current.invalidateSize()

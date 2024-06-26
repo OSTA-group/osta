@@ -67,6 +67,10 @@
 }
 
 /* override styling of leafletjs elements */
+.leaflet-control-attribution {
+    background-color: var(--ion-color-light, --ion-background-color) !important;
+}
+
 .leaflet-control-zoom {
   --accent: var(--ion-color-light-tint);
 
