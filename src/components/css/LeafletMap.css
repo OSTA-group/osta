@@ -58,11 +58,11 @@
 /* Dark mode for map tiles */
 @media (prefers-color-scheme: dark) {
     .leaflet-tile {
-        filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+        filter: brightness(0.6) invert(1.2) contrast(4) hue-rotate(200deg) saturate(0.6) brightness(0.5);
     }
 
     .leaflet-container {
-        background: #303030;
+        background: #202020;
     }
 }
 
