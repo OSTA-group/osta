@@ -16,7 +16,7 @@ export function LandmarkMarker({ landmark, markerIcon, markerIconVisited, showPo
   return (
     <Marker position={[landmark.location.lat, landmark.location.lng]} icon={landmark.visited ? markerIconVisited : markerIcon}>
       {showPopup && (
-        <Popup>
+        <Popup keepInView={false} autoPan={false}>
           <IonRow>
             <IonText className={'popup__text__center'}>
               <IonButton routerLink={`/landmark/${landmark.id}`}>
