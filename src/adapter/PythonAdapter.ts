@@ -7,6 +7,7 @@ import AdapterHelper from '../helpers/AdapterHelper'
 
 const PACKAGES = {
   axios: axios,
+  math: Math,
 }
 
 async function installExtension(newExtension: MarketplaceExtension): Promise<Extension> {

@@ -83,7 +83,7 @@ export function MapScreen() {
           {mapDataLoaded && (
             <>
               {!trip.started && (
-                <MarkerClusterGroup chunkedLoading disableClusteringAtZoom={18}>
+                <MarkerClusterGroup chunkedLoading disableClusteringAtZoom={16}>
                   {landmarks.map((landmark: Landmark) => (
                     <LandmarkMarker
                       key={landmark.id}
@@ -114,7 +114,7 @@ export function MapScreen() {
                   )}
 
                   {/* CLUSTER FOR LANDMARK NOT IN A TRIP */}
-                  <MarkerClusterGroup chunkedLoading disableClusteringAtZoom={18}>
+                  <MarkerClusterGroup chunkedLoading disableClusteringAtZoom={16}>
                     {landmarks.map(
                       (landmark: Landmark) =>
                         !landmark.inTrip && (
@@ -175,7 +175,7 @@ export function MapScreen() {
                   color="danger"
                   onClick={trip.isLastVisited ? openTripResultModal : openEndTripAlert}
                 >
-                  <IonIcon icon={squareOutline}></IonIcon>
+                  <IonIcon icon={squareOutline}/>
                 </IonFabButton>
               </>
             )}
