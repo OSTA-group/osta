@@ -12,6 +12,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  color: white;
   border: none;
   cursor: pointer;
   z-index: 3;
@@ -55,7 +56,22 @@
   margin-left: 1em;
 }
 
+/* Dark mode for map tiles */
+@media (prefers-color-scheme: dark) {
+    .leaflet-tile {
+        filter: brightness(0.6) invert(1) contrast(4) hue-rotate(200deg) saturate(0.6) brightness(0.5);
+    }
+
+    .leaflet-container {
+        background: #202020;
+    }
+}
+
 /* override styling of leafletjs elements */
+.leaflet-control-attribution {
+    background-color: var(--ion-color-light, --ion-background-color) !important;
+}
+
 .leaflet-control-zoom {
   --accent: var(--ion-color-light-tint);
 
