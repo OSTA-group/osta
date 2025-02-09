@@ -33,7 +33,7 @@
     "@ionic/storage": "^4.0.0",
     "@tanstack/react-query": "^5.29.2",
     "@vitest/ui": "^1.5.2",
-    "axios": "^1.6.8",
+    "axios": "^1.7.4",
     "crypto-js": "^4.2.0",
     "idb": "^8.0.0",
     "ionicons": "^7.0.0",
